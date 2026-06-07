@@ -181,14 +181,13 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Wrapper sized to the PNG's aspect ratio so spire-light % is reliable.
-     Shifted slightly right + bottom so the silhouette extends to scene
-     edges and fully occludes the tram. */
+  /* Wrapper sized to the PNG's aspect ratio. Pushed further down + right
+     so the silhouette body reaches the scene bottom-right corner. */
   .mtn-wrap {
     position: absolute;
     right: -4%;
-    bottom: -6%;
-    height: 112%;
+    bottom: -14%;
+    height: 122%;
     aspect-ratio: 750 / 500;
     z-index: 3;
     pointer-events: none;
@@ -197,21 +196,34 @@
     display: block;
     width: 100%;
     height: 100%;
-    /* Mute the white slightly so it doesn't blow out against the dark sky */
-    opacity: .82;
-    filter: brightness(.92);
+    opacity: .85;
+    filter: brightness(.94);
   }
-  /* Slow-flashing red aircraft warning beacon on the tallest spire tip.
-     Percentages are relative to .mtn-wrap, which matches the PNG aspect ratio. */
+  /* Invisible occluder: a soft vertical gradient that fades from
+     transparent → page bg, anchored to the bottom-right of the scene.
+     Hides the tram where the mountain silhouette has transparent gaps
+     near its bottom curve, without showing a visible bar. */
+  .scene::after {
+    content: "";
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 68%;
+    height: 90px;
+    background: linear-gradient(180deg, transparent 0%, var(--bg) 55%, var(--bg-deeper) 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  /* Slow-flashing red aircraft warning beacon on the tallest spire tip */
   .spire-light {
     position: absolute;
-    top: 20%;
-    left: 47%;
+    top: 22%;
+    left: 45%;
     width: 8px; height: 8px;
     margin-left: -4px; margin-top: -4px;
     border-radius: 50%;
     background: #ff3a3a;
     animation: spire-blink 2.8s ease-in-out infinite;
+    z-index: 4;
   }
   @keyframes spire-blink {
     0%, 100% {
