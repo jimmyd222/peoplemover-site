@@ -111,12 +111,21 @@
     0%, 100% { background-position: 0% 50%; }
     50%      { background-position: 100% 50%; }
   }
+  .esp {
+    font-family: 'Outfit', sans-serif;
+    font-style: italic; font-weight: 300;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: rgba(244,234,213,.5);
+    letter-spacing: .04em;
+    margin-bottom: 36px;
+    margin-top: -8px;
+  }
   .tagline {
     font-family: 'Outfit', sans-serif;
     font-weight: 300;
     font-size: clamp(17px, 2.2vw, 22px);
     color: var(--cream-dim);
-    max-width: 38ch;
+    max-width: 40ch;
     line-height: 1.5;
     margin-bottom: 64px;
     letter-spacing: .01em;
@@ -129,9 +138,19 @@
   .scene {
     position: relative;
     width: 100%; max-width: 720px;
-    height: 110px;
+    height: 140px;
     margin-bottom: 56px;
     overflow: hidden;
+  }
+  .space-mtn {
+    position: absolute;
+    right: 8%; bottom: 24px;
+    width: 110px; height: 90px;
+    opacity: .85;
+    pointer-events: none;
+  }
+  @media (max-width: 520px) {
+    .space-mtn { right: 4%; width: 84px; height: 70px; }
   }
   .track {
     position: absolute; left: 0; right: 0; bottom: 28px; height: 2px;
@@ -206,11 +225,27 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow">Tomorrowland · Transit · Authority</div>
-  <h1>Always <em>boarding</em>.</h1>
-  <p class="tagline">A love letter from <strong>Quinn</strong>, <strong>Lisa</strong> &amp; <strong>Jim</strong><br>to a slow blue tram.</p>
+  <div class="eyebrow">Tomorrowland Transit Authority · WEDway</div>
+  <h1>Please stand clear<br>of the <em>doors</em>.</h1>
+  <p class="esp"><em>Por favor manténgase alejado de las puertas.</em></p>
+  <p class="tagline">A love letter from <strong>Quinn</strong>, <strong>Lisa</strong> &amp; <strong>Jim</strong><br>to the best ride in the Magic Kingdom.</p>
 
   <div class="scene" aria-hidden="true">
+    <!-- Space Mountain silhouette in the distance -->
+    <svg class="space-mtn" viewBox="0 0 180 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet">
+      <defs>
+        <linearGradient id="mtnGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="#1d2c54" stop-opacity=".9"/>
+          <stop offset="100%" stop-color="#0a1430" stop-opacity=".6"/>
+        </linearGradient>
+      </defs>
+      <!-- Cone with ridged spires -->
+      <path d="M90 6 L72 86 L108 86 Z" fill="url(#mtnGrad)"/>
+      <path d="M90 6 L80 86 M90 6 L100 86 M90 6 L88 86 M90 6 L92 86" stroke="#3a4a6e" stroke-width=".6" opacity=".5"/>
+      <!-- Spire tip -->
+      <circle cx="90" cy="6" r="1.4" fill="#ffc266"/>
+      <circle cx="90" cy="6" r="3" fill="#ffc266" opacity=".25"/>
+    </svg>
     <div class="track"></div>
     <div class="tram-wrap">
       <!-- PeopleMover: 3 connected cars, blue & cream, bubble windows -->
@@ -273,7 +308,7 @@
 
   <div class="strip">
     <span class="dot"></span>
-    <span>NOW DEPARTING · TOMORROW</span>
+    <span>PAGING MR. MORROW · MR. TOM MORROW</span>
   </div>
 </main>
 
