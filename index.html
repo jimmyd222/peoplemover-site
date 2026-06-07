@@ -181,34 +181,36 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Space Mountain illustration — dominates the right side of the scene */
+  /* Space Mountain silhouette
+     The JPG is black-on-white. invert(1) flips it to white-on-black,
+     then mix-blend-mode: lighten lets the black background drop away
+     against the dark sky, leaving just the white mountain. No file
+     editing needed. */
   .space-mtn {
     position: absolute;
-    right: 0; bottom: 0;
-    height: 100%;
+    right: -2%;
+    bottom: -18%;
+    height: 150%;
     width: auto;
     z-index: 3;
     pointer-events: none;
-    /* Soft fade on the left edge so the image's teal sky blends into the page bg */
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 100%);
-            mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 100%);
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,.45));
+    filter: invert(1) brightness(1.05);
+    mix-blend-mode: lighten;
   }
   @media (max-width: 520px) {
-    .space-mtn { height: 92%; }
+    .space-mtn { height: 130%; bottom: -10%; }
   }
-  /* Dark base bar — sits beneath the image so the tram disappears under it */
+  /* Dark base bar across the bottom — tram disappears beneath it */
   .mtn-base {
     position: absolute;
-    right: 0; bottom: 0;
-    width: 60%;
-    height: 22px;
-    background: #0a1a2c;
+    right: 0; bottom: 0; left: 30%;
+    height: 28px;
+    background: linear-gradient(180deg, #0a1430 0%, #050a1c 100%);
     z-index: 4;
     pointer-events: none;
   }
   @media (max-width: 520px) {
-    .mtn-base { width: 70%; }
+    .mtn-base { left: 22%; }
   }
   /* Track runs from the left edge of the scene to the portal on the mountain's left face */
   .track {
@@ -423,9 +425,9 @@
       <div class="billboard-post"></div>
     </div>
 
-    <!-- Space Mountain illustration (image asset) -->
-    <img class="space-mtn" src="space-mountain.webp" alt="" loading="eager" decoding="async"/>
-    <!-- Dark band beneath the image so the tram visibly enters under the structure base -->
+    <!-- Space Mountain silhouette (inverted + screened so it renders white on the dark sky) -->
+    <img class="space-mtn" src="space-mountain.jpg" alt="" loading="eager" decoding="async"/>
+    <!-- Dark band beneath the silhouette so the tram disappears under the structure base -->
     <div class="mtn-base"></div>
 
 
