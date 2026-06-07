@@ -330,7 +330,7 @@
     flex: 0 0 auto;
   }
   .ticker {
-    width: min(620px, 84vw);
+    width: min(760px, 92vw);
     height: 22px;
     overflow: hidden;
     position: relative;
@@ -340,24 +340,25 @@
     display: flex; align-items: center; justify-content: center;
     white-space: nowrap;
     color: var(--teal);
-    letter-spacing: .14em;
-    font-size: 16px;
+    letter-spacing: .1em;
+    font-size: 14px;
     opacity: 0;
-    animation: tickerFade 30s linear infinite;
+    animation: tickerFade 36s linear infinite;
   }
   .ticker > span:nth-child(1) { animation-delay: 0s;  }
   .ticker > span:nth-child(2) { animation-delay: 6s;  }
   .ticker > span:nth-child(3) { animation-delay: 12s; }
   .ticker > span:nth-child(4) { animation-delay: 18s; }
   .ticker > span:nth-child(5) { animation-delay: 24s; }
+  .ticker > span:nth-child(6) { animation-delay: 30s; }
   .ticker > span sub {
     font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--teal-glow);
   }
   @keyframes tickerFade {
     0%   { opacity: 0; }
     2%   { opacity: 1; }
-    18%  { opacity: 1; }
-    20%  { opacity: 0; }
+    15%  { opacity: 1; }
+    17%  { opacity: 0; }
     100% { opacity: 0; }
   }
   @keyframes blink {
@@ -615,9 +616,10 @@
     <div class="ticker" aria-label="Tomorrowland Transit Authority public address">
       <span>PAGING MR. MORROW · MR. TOM MORROW</span>
       <span>I'M ORAC-5, YOUR GUIDE ABOARD THIS HIGHWAY IN THE SKY</span>
-      <span>MY FELLOW SENTIENT LIFE FORMS · JOURNEY HAS NEARLY COME FULL CIRCLE</span>
-      <span>EXPLORE TOMORROW, TODAY · SEE YOU IN THE FUTURE</span>
+      <span>MY FELLOW SENTIENT LIFE FORMS YOUR JOURNEY HAS NEARLY COME FULL CIRCLE</span>
+      <span>NOW IS THE TIME, NOW IS THE BEST TIME TO GO OUT AND EXPLORE TOMORROW, TODAY</span>
       <span>NOW BOARDING · WEDWAY PEOPLEMOVER · EST. 1975</span>
+      <span>SEE YOU IN THE FUTURE!</span>
     </div>
   </div>
 </main>
