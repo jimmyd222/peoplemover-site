@@ -408,9 +408,9 @@
           <stop offset="100%" stop-color="#fbf6e8" stop-opacity=".9"/>
         </linearGradient>
       </defs>
-      <path d="M -20 220 Q 250 -40, 720 60" stroke="url(#cometGrad)" stroke-width="2" fill="none"/>
-      <circle cx="720" cy="60" r="3" fill="#fbf6e8"/>
-      <circle cx="720" cy="60" r="7" fill="#fbf6e8" opacity=".25"/>
+      <path d="M -20 140 Q 280 -50, 600 30" stroke="url(#cometGrad)" stroke-width="1.8" fill="none"/>
+      <circle cx="600" cy="30" r="2.8" fill="#fbf6e8"/>
+      <circle cx="600" cy="30" r="7" fill="#fbf6e8" opacity=".3"/>
     </svg>
 
     <!-- Coral Moons billboard — the in-ride ad you pass on the PeopleMover -->
@@ -428,17 +428,17 @@
       <div class="billboard-post"></div>
     </div>
 
-    <!-- Space Mountain — retro stylized: angular multi-peaked silhouette, banded body, central spire cluster -->
+    <!-- Space Mountain — vintage poster style, traced from the illustrated reference -->
     <svg class="space-mtn" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
       <defs>
-        <linearGradient id="mtnFace" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#fbf6e8"/>
-          <stop offset="60%" stop-color="#e8e0c8"/>
-          <stop offset="100%" stop-color="#a89a78"/>
+        <linearGradient id="mtnFace" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#ffffff"/>
+          <stop offset="55%" stop-color="#f4f1e8"/>
+          <stop offset="100%" stop-color="#c8c4b8"/>
         </linearGradient>
-        <linearGradient id="mtnShade" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stop-color="#0d2c38" stop-opacity=".0"/>
-          <stop offset="100%" stop-color="#0d2c38" stop-opacity=".35"/>
+        <linearGradient id="mtnShadeR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="60%" stop-color="#0d2c38" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0d2c38" stop-opacity=".25"/>
         </linearGradient>
         <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%"  stop-color="#9be8f0" stop-opacity=".9"/>
@@ -447,105 +447,106 @@
         </radialGradient>
       </defs>
 
-      <!-- Base building band (occludes tram fully, edge-to-edge) -->
-      <rect x="0" y="254" width="480" height="26" fill="#0d2c38"/>
-      <rect x="0" y="252" width="480" height="3" fill="#2c5e6c" opacity=".7"/>
+      <!-- Foreground dark base building (occludes tram) -->
+      <path d="M 0 256 L 0 270 Q 240 290, 480 270 L 480 256 Z" fill="#0a2530"/>
 
-      <!-- Wide base body — gentle curved bottom flaring into the angular sides -->
-      <path d="M 0 254
-               L 0 240
-               Q 30 218, 80 198
-               L 130 152
-               L 168 110
-               L 195 92
-               L 215 92
-               L 240 70
-               L 265 92
-               L 285 92
-               L 312 110
-               L 350 152
-               L 400 198
-               Q 450 218, 480 240
-               L 480 254
+      <!-- Main mountain silhouette with TWO angular wing peaks + tiered central peak -->
+      <path d="M 0 256
+               L 0 232
+               Q 30 220, 60 212
+               L 100 200
+               L 130 188
+               L 155 165
+               L 178 130             /* LEFT WING PEAK rises */
+               L 198 105
+               L 205 132             /* back down from left wing */
+               L 218 122
+               L 222 110
+               L 228 90
+               L 235 78              /* secondary platform left edge */
+               L 238 70              /* main peak left side */
+               L 240 60              /* peak crest */
+               L 242 70
+               L 245 78
+               L 252 90              /* secondary platform right edge */
+               L 258 110
+               L 262 122
+               L 275 132             /* down toward right wing base */
+               L 302 105             /* RIGHT WING PEAK rises */
+               L 325 130
+               L 350 165
+               L 380 188
+               L 410 200
+               L 450 212
+               Q 470 220, 480 232
+               L 480 256
                Z"
             fill="url(#mtnFace)"/>
-      <!-- Right-side shading wash -->
-      <path d="M 0 254
-               L 0 240
-               Q 30 218, 80 198
-               L 130 152
-               L 168 110
-               L 195 92
-               L 215 92
-               L 240 70
-               L 265 92
-               L 285 92
-               L 312 110
-               L 350 152
-               L 400 198
-               Q 450 218, 480 240
-               L 480 254
-               Z"
-            fill="url(#mtnShade)"/>
+      <!-- Soft right-side shading wash -->
+      <path d="M 0 256 L 0 232 Q 30 220, 60 212 L 100 200 L 130 188 L 155 165 L 178 130 L 198 105 L 205 132 L 218 122 L 222 110 L 228 90 L 235 78 L 238 70 L 240 60 L 242 70 L 245 78 L 252 90 L 258 110 L 262 122 L 275 132 L 302 105 L 325 130 L 350 165 L 380 188 L 410 200 L 450 212 Q 470 220, 480 232 L 480 256 Z"
+            fill="url(#mtnShadeR)"/>
 
-      <!-- Bold horizontal bands across the lower body (the illustrated banding) -->
-      <g fill="#0d2c38" opacity=".75">
-        <rect x="0" y="244" width="480" height="3"/>
-        <rect x="20" y="232" width="440" height="2"/>
-        <rect x="40" y="220" width="400" height="2"/>
-        <rect x="60" y="208" width="360" height="1.5"/>
+      <!-- Vertical ridge lines fanning down from the peak across the whole body -->
+      <g stroke="#0d2c38" stroke-width="1" opacity=".5" fill="none">
+        <path d="M 238 72 L 30  256"/>
+        <path d="M 239 72 L 80  256"/>
+        <path d="M 239 72 L 130 256"/>
+        <path d="M 240 72 L 175 256"/>
+        <path d="M 240 72 L 215 256"/>
+        <path d="M 240 65 L 240 256"/>
+        <path d="M 241 72 L 270 256"/>
+        <path d="M 241 72 L 305 256"/>
+        <path d="M 242 72 L 350 256"/>
+        <path d="M 242 72 L 400 256"/>
+        <path d="M 242 72 L 450 256"/>
       </g>
 
-      <!-- Vertical ridge lines fanning down from the peak structure -->
-      <g stroke="#0d2c38" stroke-width="1.2" opacity=".55" fill="none">
-        <path d="M 215 95 L 80  252"/>
-        <path d="M 220 95 L 120 252"/>
-        <path d="M 225 95 L 155 252"/>
-        <path d="M 230 95 L 188 252"/>
-        <path d="M 235 95 L 215 252"/>
-        <path d="M 240 75 L 240 252"/>
-        <path d="M 245 95 L 265 252"/>
-        <path d="M 250 95 L 292 252"/>
-        <path d="M 255 95 L 325 252"/>
-        <path d="M 260 95 L 360 252"/>
-        <path d="M 265 95 L 400 252"/>
+      <!-- Horizontal bands across the lower portion (the iconic illustration banding) -->
+      <g fill="#0d2c38">
+        <rect x="0"   y="252" width="480" height="2.5"/>
+        <rect x="20"  y="244" width="440" height="2"/>
+        <rect x="50"  y="234" width="380" height="2"/>
+        <rect x="85"  y="222" width="310" height="1.6"/>
+        <rect x="120" y="210" width="240" height="1.4"/>
       </g>
 
-      <!-- Side wing-peak inner shadows (gives the angular wings depth) -->
-      <g fill="#0d2c38" opacity=".3">
-        <path d="M 168 110 L 195 92 L 195 110 Z"/>
-        <path d="M 312 110 L 285 92 L 285 110 Z"/>
+      <!-- Wing peak ridge accents (the cantilevered roof edges) -->
+      <g stroke="#0d2c38" stroke-width="1.2" opacity=".7" fill="none">
+        <path d="M 155 165 L 178 130 L 198 105"/>
+        <path d="M 198 105 L 205 132"/>
+        <path d="M 302 105 L 325 130 L 350 165"/>
+        <path d="M 275 132 L 302 105"/>
       </g>
 
-      <!-- Central spire cluster — 3 thin needles, vintage poster style -->
-      <g stroke="#fbf6e8" stroke-width="2.4" stroke-linecap="round" fill="none">
-        <!-- Tallest center spire -->
-        <line x1="240" y1="72" x2="240" y2="8"/>
-        <!-- Left flanking spire (a bit shorter, slight lean) -->
-        <line x1="232" y1="80" x2="228" y2="24"/>
-        <!-- Right flanking spire (a bit shorter, slight lean) -->
-        <line x1="248" y1="80" x2="252" y2="24"/>
+      <!-- Central peak ridge highlight -->
+      <path d="M 240 60 L 238 70 L 235 78 L 228 90 L 222 110 L 218 122 L 205 132"
+            stroke="#a8a59c" stroke-width=".8" opacity=".5" fill="none"/>
+
+      <!-- SPIRE CLUSTER — 3 prominent thin needles emerging from the central peak -->
+      <g stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none">
+        <line x1="240" y1="62" x2="240" y2="6"/>
+        <line x1="234" y1="74" x2="230" y2="22"/>
+        <line x1="246" y1="74" x2="250" y2="22"/>
       </g>
-      <!-- Subtle outer mini spires -->
-      <g stroke="#fbf6e8" stroke-width="1.6" stroke-linecap="round" fill="none">
-        <line x1="220" y1="90" x2="216" y2="50"/>
-        <line x1="260" y1="90" x2="264" y2="50"/>
+      <!-- Outer thinner mini spires -->
+      <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" fill="none">
+        <line x1="226" y1="86" x2="222" y2="48"/>
+        <line x1="254" y1="86" x2="258" y2="48"/>
       </g>
-      <!-- Tiny glow at the tip -->
-      <circle cx="240" cy="8" r="2.2" fill="#9be8f0"/>
-      <circle cx="240" cy="8" r="6" fill="#9be8f0" opacity=".4"/>
+      <!-- Cross-brace on tallest center spire -->
+      <g stroke="#ffffff" stroke-width=".8" stroke-linecap="round">
+        <line x1="237" y1="18" x2="243" y2="18"/>
+        <line x1="236" y1="30" x2="244" y2="30"/>
+        <line x1="235" y1="44" x2="245" y2="44"/>
+      </g>
+      <!-- Glowing tip -->
+      <circle cx="240" cy="6" r="2.2" fill="#9be8f0"/>
+      <circle cx="240" cy="6" r="6" fill="#9be8f0" opacity=".4"/>
 
       <!-- Dark arched portal where the PeopleMover enters — on the LEFT face -->
-      <path d="M 70 232
-               Q 70 214, 88 214
-               L 144 214
-               Q 162 214, 162 232
-               L 162 252
-               L 70 252 Z"
-            fill="#020e15"/>
-      <ellipse cx="116" cy="232" rx="52" ry="22" fill="url(#portalGlow)" opacity=".8"/>
-      <path d="M 70 232 Q 70 214, 88 214 L 144 214 Q 162 214, 162 232"
-            stroke="#5bd0e0" stroke-width="1.2" fill="none" opacity=".7"/>
+      <path d="M 60 236 Q 60 218, 78 218 L 134 218 Q 152 218, 152 236 L 152 256 L 60 256 Z" fill="#020e15"/>
+      <ellipse cx="106" cy="236" rx="52" ry="22" fill="url(#portalGlow)" opacity=".8"/>
+      <path d="M 60 236 Q 60 218, 78 218 L 134 218 Q 152 218, 152 236" stroke="#5bd0e0" stroke-width="1.2" fill="none" opacity=".7"/>
     </svg>
 
 
