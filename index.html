@@ -181,35 +181,35 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Wrapper sized to the PNG's aspect ratio. Pushed further down + right
-     so the silhouette body reaches the scene bottom-right corner. */
+  /* Mountain wrapper — top of the z-stack so nothing draws over it */
   .mtn-wrap {
     position: absolute;
     right: -4%;
     bottom: -14%;
     height: 122%;
     aspect-ratio: 750 / 500;
-    z-index: 3;
+    z-index: 5;
     pointer-events: none;
   }
   .mtn-wrap .space-mtn {
     display: block;
     width: 100%;
     height: 100%;
-    opacity: .85;
-    filter: brightness(.94);
+    opacity: 1;
+    filter: brightness(.85);
   }
-  /* Invisible occluder: a soft vertical gradient that fades from
-     transparent → page bg, anchored to the bottom-right of the scene.
-     Hides the tram where the mountain silhouette has transparent gaps
-     near its bottom curve, without showing a visible bar. */
+  /* Tram occluder — sits BETWEEN the tram (z:2) and the mountain (z:5).
+     Tall enough to fully cover the tram's vertical range, and gradient
+     fades to fully transparent at the top so no hard edge is visible.
+     The mountain renders OVER this layer (higher z), so the bottom of
+     the silhouette doesn't get erased. */
   .scene::after {
     content: "";
     position: absolute;
     right: 0; bottom: 0;
-    width: 68%;
-    height: 90px;
-    background: linear-gradient(180deg, transparent 0%, var(--bg) 55%, var(--bg-deeper) 100%);
+    width: 72%;
+    height: 140px;
+    background: linear-gradient(180deg, transparent 0%, transparent 25%, var(--bg-deeper) 80%, var(--bg-deepest) 100%);
     z-index: 3;
     pointer-events: none;
   }
@@ -223,7 +223,7 @@
     border-radius: 50%;
     background: #ff3a3a;
     animation: spire-blink 2.8s ease-in-out infinite;
-    z-index: 4;
+    z-index: 6;
   }
   @keyframes spire-blink {
     0%, 100% {
