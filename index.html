@@ -20,13 +20,12 @@
     --bg-deeper: #050a1c;
     --cream: #f4ead5;
     --cream-dim: #b9ad94;
-    --pm-blue: #1f7ad6;        /* the PeopleMover signage royal blue */
-    --pm-orange: #f5832a;      /* the iconic PeopleMover orange track */
-    --pm-red: #d83b30;          /* monorail red */
-    --amber: #f5832a;
-    --amber-glow: #ffb066;
-    --teal: #4fc3d9;
-    --rail: #2a3a5e;
+    --pm-blue: #1f7ad6;        /* PeopleMover signage royal blue */
+    --pm-blue-deep: #0e54a6;
+    --pm-silver: #c8cdd4;       /* PeopleMover hull silver */
+    --teal: #2bbfd6;            /* Monorail Teal */
+    --teal-glow: #6fe0f0;
+    --rail: #3a4a6e;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -45,7 +44,7 @@
     background-image:
       radial-gradient(1px 1px at 12% 18%, rgba(244,234,213,.55), transparent 50%),
       radial-gradient(1px 1px at 27% 72%, rgba(244,234,213,.4), transparent 50%),
-      radial-gradient(1.2px 1.2px at 43% 25%, rgba(255,194,102,.5), transparent 50%),
+      radial-gradient(1.2px 1.2px at 43% 25%, rgba(123,227,255,.55), transparent 50%),
       radial-gradient(1px 1px at 58% 62%, rgba(244,234,213,.45), transparent 50%),
       radial-gradient(1px 1px at 71% 14%, rgba(244,234,213,.5), transparent 50%),
       radial-gradient(1px 1px at 84% 78%, rgba(244,234,213,.4), transparent 50%),
@@ -75,62 +74,56 @@
     text-align: center;
   }
 
-  /* Eyebrow styled like the actual blue PeopleMover signage panel */
-  .eyebrow {
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: .26em;
-    color: #ffffff;
-    background: linear-gradient(180deg, #2a8ce5 0%, var(--pm-blue) 55%, #0e54a6 100%);
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 3px;
-    padding: 6px 18px 7px;
-    margin-bottom: 28px;
-    display: inline-flex; align-items: center; gap: 10px;
+  /* Signage panel — mimics the in-park PeopleMover sign */
+  .sign {
+    display: inline-block;
+    padding: 18px clamp(28px, 6vw, 64px) 22px;
+    margin-bottom: 32px;
+    background: linear-gradient(180deg, #3296ec 0%, var(--pm-blue) 55%, var(--pm-blue-deep) 100%);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 6px;
     box-shadow:
-      0 0 18px rgba(31,122,214,.35),
-      inset 0 1px 0 rgba(255,255,255,.18);
+      0 0 40px rgba(31,122,214,.4),
+      0 0 80px rgba(31,122,214,.15),
+      inset 0 1px 0 rgba(255,255,255,.22),
+      inset 0 -1px 0 rgba(0,0,0,.25);
+    text-align: center;
+    position: relative;
+  }
+  /* Tiny screw heads in each corner for that signage realness */
+  .sign::before, .sign::after {
+    content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f4f1ea 0%, #6b7180 60%, #2a3142 100%);
+  }
+  .sign::before { top: 6px; left: 8px; box-shadow: calc(100% + 11px) 0 0 0 #2a3142, calc(100% + 11px) 0 0 0; }
+  .sign::after  { bottom: 6px; left: 8px; }
+  .sign-overline {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: clamp(10px, 1.2vw, 13px);
+    letter-spacing: .42em;
+    text-transform: uppercase;
+    color: #ffffff;
     text-shadow: 0 1px 0 rgba(0,0,0,.35);
+    margin-bottom: 6px;
+    opacity: .95;
   }
-  .eyebrow .pip {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--pm-orange);
-    box-shadow: 0 0 6px var(--pm-orange);
+  .sign-overline .rule {
+    width: clamp(22px, 5vw, 44px); height: 1px;
+    background: rgba(255,255,255,.65);
   }
-
-  h1 {
+  .sign-name {
     font-family: 'Big Shoulders Display', sans-serif;
     font-weight: 800;
-    font-size: clamp(64px, 14vw, 156px);
-    line-height: .88;
-    letter-spacing: -.01em;
-    color: var(--cream);
-    margin-bottom: 28px;
-    text-shadow: 0 0 60px rgba(240,168,58,.15);
-  }
-  h1 em {
-    font-style: normal;
-    color: var(--amber);
-    background: linear-gradient(105deg, var(--amber) 0%, var(--amber-glow) 50%, var(--amber) 100%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glow 5s ease-in-out infinite;
-  }
-  @keyframes glow {
-    0%, 100% { background-position: 0% 50%; }
-    50%      { background-position: 100% 50%; }
-  }
-  .esp {
-    font-family: 'Outfit', sans-serif;
-    font-style: italic; font-weight: 300;
-    font-size: clamp(14px, 1.6vw, 17px);
-    color: rgba(244,234,213,.5);
-    letter-spacing: .04em;
-    margin-bottom: 36px;
-    margin-top: -8px;
+    font-size: clamp(54px, 12vw, 128px);
+    line-height: .9;
+    letter-spacing: .02em;
+    color: #ffffff;
+    text-shadow:
+      0 2px 0 rgba(0,0,0,.25),
+      0 0 24px rgba(255,255,255,.18);
   }
   .tagline {
     font-family: 'Outfit', sans-serif;
@@ -183,17 +176,17 @@
     100% { transform: translateX(calc(100vw + 220px)); }
   }
   /* PeopleMover track (ground level) */
-  /* PeopleMover track — slim orange beam (the ride's signature orange floor) */
+  /* PeopleMover track — slim metallic beam */
   .track {
-    position: absolute; left: 0; right: 0; bottom: 34px; height: 4px;
+    position: absolute; left: 0; right: 0; bottom: 34px; height: 3px;
     background:
-      linear-gradient(90deg, transparent 0%, var(--pm-orange) 14%, #ffa050 50%, var(--pm-orange) 86%, transparent 100%);
+      linear-gradient(90deg, transparent 0%, #6b7d9e 14%, #aab6c9 50%, #6b7d9e 86%, transparent 100%);
     border-radius: 2px;
-    box-shadow: 0 0 16px rgba(245,131,42,.35);
+    box-shadow: 0 0 14px rgba(123,140,170,.25);
   }
   .track::after {
     content: ""; position: absolute; left: 14%; right: 14%; bottom: -4px; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(245,131,42,.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(43,191,214,.45), transparent);
     filter: blur(2px);
   }
   .tram-wrap {
@@ -240,15 +233,15 @@
     font-weight: 800;
     font-size: 16px;
     letter-spacing: .12em;
-    color: #fff7e0;
-    text-shadow: 0 0 10px rgba(255,194,102,.55);
+    color: #f4f7fb;
+    text-shadow: 0 0 10px rgba(123,227,255,.55);
     line-height: 1;
   }
   .billboard-line sub {
     font-size: 11px;
     vertical-align: baseline;
     position: relative; top: 2px;
-    color: #ffc266;
+    color: #7be3ff;
   }
   .billboard-sub {
     font-family: 'VT323', monospace;
@@ -312,7 +305,7 @@
     color: var(--teal);
   }
   .ticker-track > span sub {
-    font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--amber);
+    font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--teal-glow);
   }
   @keyframes ticker {
     0%, 22%   { transform: translateY(0); }
@@ -345,9 +338,15 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow"><span class="pip"></span>Tomorrowland Transit Authority · PeopleMover<span class="pip"></span></div>
-  <h1>Please stand clear<br>of the <em>doors</em>.</h1>
-  <p class="esp"><em>Por favor manténgase alejado de las puertas.</em></p>
+  <!-- PeopleMover signage panel — mimics the in-park sign -->
+  <div class="sign">
+    <div class="sign-overline">
+      <span class="rule"></span>
+      <span>Tomorrowland Transit Authority</span>
+      <span class="rule"></span>
+    </div>
+    <div class="sign-name">PEOPLEMOVER</div>
+  </div>
   <p class="tagline">A love letter to <strong>the slow blue tram</strong><br>and <strong>the silver bullet</strong> overhead.</p>
 
   <div class="scene" aria-hidden="true">
@@ -378,8 +377,8 @@
       <path d="M90 6 L72 86 L108 86 Z" fill="url(#mtnGrad)"/>
       <path d="M90 6 L80 86 M90 6 L100 86 M90 6 L88 86 M90 6 L92 86" stroke="#3a4a6e" stroke-width=".6" opacity=".5"/>
       <!-- Spire tip -->
-      <circle cx="90" cy="6" r="1.4" fill="#ffc266"/>
-      <circle cx="90" cy="6" r="3" fill="#ffc266" opacity=".25"/>
+      <circle cx="90" cy="6" r="1.4" fill="#7be3ff"/>
+      <circle cx="90" cy="6" r="3" fill="#7be3ff" opacity=".3"/>
     </svg>
     <!-- Monorail beam + train (upper) — Mark VI: white body, bold red stripe, bullet nose -->
     <div class="beam"></div>
@@ -392,12 +391,12 @@
             <stop offset="100%" stop-color="#a8a293"/>
           </linearGradient>
           <linearGradient id="monoNose" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#f04434"/>
-            <stop offset="100%" stop-color="#b8281c"/>
+            <stop offset="0%"  stop-color="#3ad6e8"/>
+            <stop offset="100%" stop-color="#178fa3"/>
           </linearGradient>
           <linearGradient id="monoStripe" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#f04434"/>
-            <stop offset="100%" stop-color="#c8302a"/>
+            <stop offset="0%"  stop-color="#3ad6e8"/>
+            <stop offset="100%" stop-color="#1aa3bb"/>
           </linearGradient>
         </defs>
         <!-- Tail car (left end) -->
@@ -468,9 +467,9 @@
       <svg width="260" height="48" viewBox="0 0 260 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="pmHull" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#ffffff"/>
-            <stop offset="60%" stop-color="#e6e0d0"/>
-            <stop offset="100%" stop-color="#9a9484"/>
+            <stop offset="0%"  stop-color="#eef0f3"/>
+            <stop offset="55%" stop-color="#c0c5cc"/>
+            <stop offset="100%" stop-color="#7a818c"/>
           </linearGradient>
           <linearGradient id="pmBlue" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%"  stop-color="#3a8fde"/>
@@ -515,8 +514,8 @@
         <!-- Car 4 (front) -->
         <use href="#pmCar" x="186" y="2"/>
 
-        <!-- Soft warm glow at the front of the lead car -->
-        <circle cx="248" cy="30" r="5" fill="#ffd07a" opacity=".22"/>
+        <!-- Soft teal glow at the front of the lead car -->
+        <circle cx="248" cy="30" r="5" fill="#7be3ff" opacity=".25"/>
       </svg>
     </div>
   </div>
