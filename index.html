@@ -20,8 +20,11 @@
     --bg-deeper: #050a1c;
     --cream: #f4ead5;
     --cream-dim: #b9ad94;
-    --amber: #f0a83a;
-    --amber-glow: #ffc266;
+    --pm-blue: #1f7ad6;        /* the PeopleMover signage royal blue */
+    --pm-orange: #f5832a;      /* the iconic PeopleMover orange track */
+    --pm-red: #d83b30;          /* monorail red */
+    --amber: #f5832a;
+    --amber-glow: #ffb066;
     --teal: #4fc3d9;
     --rail: #2a3a5e;
   }
@@ -72,20 +75,29 @@
     text-align: center;
   }
 
+  /* Eyebrow styled like the actual blue PeopleMover signage panel */
   .eyebrow {
-    font-family: 'VT323', monospace;
-    font-size: 16px;
-    letter-spacing: .42em;
-    color: var(--amber);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .26em;
+    color: #ffffff;
+    background: linear-gradient(180deg, #2a8ce5 0%, var(--pm-blue) 55%, #0e54a6 100%);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 3px;
+    padding: 6px 18px 7px;
     margin-bottom: 28px;
-    display: inline-flex; align-items: center; gap: 12px;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow:
+      0 0 18px rgba(31,122,214,.35),
+      inset 0 1px 0 rgba(255,255,255,.18);
+    text-shadow: 0 1px 0 rgba(0,0,0,.35);
   }
-  .eyebrow::before, .eyebrow::after {
-    content: ""; width: 28px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  .eyebrow .pip {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--pm-orange);
+    box-shadow: 0 0 6px var(--pm-orange);
   }
-  .eyebrow::after { background: linear-gradient(90deg, var(--amber), transparent); }
-  .eyebrow::before { background: linear-gradient(90deg, transparent, var(--amber)); }
 
   h1 {
     font-family: 'Big Shoulders Display', sans-serif;
@@ -171,13 +183,17 @@
     100% { transform: translateX(calc(100vw + 220px)); }
   }
   /* PeopleMover track (ground level) */
+  /* PeopleMover track — slim orange beam (the ride's signature orange floor) */
   .track {
-    position: absolute; left: 0; right: 0; bottom: 34px; height: 2px;
-    background: linear-gradient(90deg, transparent 0%, var(--rail) 12%, var(--rail) 88%, transparent 100%);
+    position: absolute; left: 0; right: 0; bottom: 34px; height: 4px;
+    background:
+      linear-gradient(90deg, transparent 0%, var(--pm-orange) 14%, #ffa050 50%, var(--pm-orange) 86%, transparent 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 16px rgba(245,131,42,.35);
   }
   .track::after {
-    content: ""; position: absolute; left: 12%; right: 12%; bottom: -6px; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79,195,217,.35), transparent);
+    content: ""; position: absolute; left: 14%; right: 14%; bottom: -4px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,131,42,.5), transparent);
     filter: blur(2px);
   }
   .tram-wrap {
@@ -329,7 +345,7 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow">WEDway PeopleMover · Est. 1975</div>
+  <div class="eyebrow"><span class="pip"></span>Tomorrowland Transit Authority · PeopleMover<span class="pip"></span></div>
   <h1>Please stand clear<br>of the <em>doors</em>.</h1>
   <p class="esp"><em>Por favor manténgase alejado de las puertas.</em></p>
   <p class="tagline">A love letter to <strong>the slow blue tram</strong><br>and <strong>the silver bullet</strong> overhead.</p>
@@ -365,102 +381,142 @@
       <circle cx="90" cy="6" r="1.4" fill="#ffc266"/>
       <circle cx="90" cy="6" r="3" fill="#ffc266" opacity=".25"/>
     </svg>
-    <!-- Monorail beam + train (upper) -->
+    <!-- Monorail beam + train (upper) — Mark VI: white body, bold red stripe, bullet nose -->
     <div class="beam"></div>
     <div class="monorail-wrap">
-      <svg width="280" height="38" viewBox="0 0 280 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="360" height="28" viewBox="0 0 360 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="monoBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#f4ead5"/>
-            <stop offset="55%" stop-color="#cdc4ad"/>
-            <stop offset="100%" stop-color="#8a8470"/>
+            <stop offset="0%"  stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#e8e3d6"/>
+            <stop offset="100%" stop-color="#a8a293"/>
           </linearGradient>
-          <linearGradient id="monoStripe" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"  stop-color="#d94a3a"/>
-            <stop offset="100%" stop-color="#a82c1f"/>
+          <linearGradient id="monoNose" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#f04434"/>
+            <stop offset="100%" stop-color="#b8281c"/>
           </linearGradient>
-          <linearGradient id="monoWindow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#9ed8ea"/>
-            <stop offset="100%" stop-color="#3a6b8a"/>
+          <linearGradient id="monoStripe" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#f04434"/>
+            <stop offset="100%" stop-color="#c8302a"/>
           </linearGradient>
         </defs>
-        <!-- Nose car: sleek bullet -->
-        <path d="M278 12 Q278 6 270 5 L196 5 Q190 5 188 8 L188 26 Q188 30 192 30 L274 30 Q278 30 278 26 Z" fill="url(#monoBody)"/>
-        <!-- Mid car -->
-        <rect x="100" y="6" width="84" height="24" rx="5" fill="url(#monoBody)"/>
-        <!-- Tail car -->
-        <path d="M2 12 Q2 6 10 5 L92 5 Q96 5 96 9 L96 26 Q96 30 92 30 L8 30 Q2 30 2 26 Z" fill="url(#monoBody)"/>
-        <!-- Iconic red side stripe across all cars -->
-        <rect x="2"   y="20" width="94"  height="3" fill="url(#monoStripe)"/>
-        <rect x="100" y="20" width="84"  height="3" fill="url(#monoStripe)"/>
-        <rect x="188" y="20" width="90"  height="3" fill="url(#monoStripe)"/>
-        <!-- Windows: long continuous strip per car -->
-        <rect x="10"  y="9" width="80" height="9" rx="3" fill="url(#monoWindow)"/>
-        <rect x="104" y="9" width="76" height="9" rx="3" fill="url(#monoWindow)"/>
-        <rect x="194" y="9" width="76" height="9" rx="3" fill="url(#monoWindow)"/>
-        <!-- Nose headlight -->
-        <circle cx="274" cy="14" r="1.6" fill="#ffe7a3"/>
-        <circle cx="274" cy="14" r="3.5" fill="#ffe7a3" opacity=".25"/>
-        <!-- Bogie shadows under each car -->
-        <rect x="20"  y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
-        <rect x="112" y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
-        <rect x="204" y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
+        <!-- Tail car (left end) -->
+        <path d="M2 10 Q2 4 10 4 L70 4 L70 24 L10 24 Q2 24 2 18 Z" fill="url(#monoBody)"/>
+        <!-- Middle cars -->
+        <rect x="73" y="4"  width="64" height="20" fill="url(#monoBody)"/>
+        <rect x="140" y="4" width="64" height="20" fill="url(#monoBody)"/>
+        <rect x="207" y="4" width="64" height="20" fill="url(#monoBody)"/>
+        <!-- Nose car (right end, bullet) -->
+        <path d="M274 4 L340 4 Q352 4 357 12 Q358 14 358 16 Q358 24 350 24 L274 24 Z" fill="url(#monoBody)"/>
+        <!-- Iconic red nose tip -->
+        <path d="M340 4 Q352 4 357 12 Q358 14 358 16 Q358 24 350 24 L340 24 Z" fill="url(#monoNose)"/>
+        <!-- Bold red side stripe — full length -->
+        <rect x="2"   y="17" width="68" height="3.2" fill="url(#monoStripe)"/>
+        <rect x="73"  y="17" width="64" height="3.2" fill="url(#monoStripe)"/>
+        <rect x="140" y="17" width="64" height="3.2" fill="url(#monoStripe)"/>
+        <rect x="207" y="17" width="64" height="3.2" fill="url(#monoStripe)"/>
+        <rect x="274" y="17" width="76" height="3.2" fill="url(#monoStripe)"/>
+        <!-- Many small individual windows (Mark VI signature) — top row -->
+        <g fill="#3a6b8a">
+          <rect x="10"  y="8" width="6" height="6" rx="1"/>
+          <rect x="20"  y="8" width="6" height="6" rx="1"/>
+          <rect x="30"  y="8" width="6" height="6" rx="1"/>
+          <rect x="40"  y="8" width="6" height="6" rx="1"/>
+          <rect x="50"  y="8" width="6" height="6" rx="1"/>
+          <rect x="60"  y="8" width="6" height="6" rx="1"/>
+          <rect x="76"  y="8" width="6" height="6" rx="1"/>
+          <rect x="86"  y="8" width="6" height="6" rx="1"/>
+          <rect x="96"  y="8" width="6" height="6" rx="1"/>
+          <rect x="106" y="8" width="6" height="6" rx="1"/>
+          <rect x="116" y="8" width="6" height="6" rx="1"/>
+          <rect x="126" y="8" width="6" height="6" rx="1"/>
+          <rect x="143" y="8" width="6" height="6" rx="1"/>
+          <rect x="153" y="8" width="6" height="6" rx="1"/>
+          <rect x="163" y="8" width="6" height="6" rx="1"/>
+          <rect x="173" y="8" width="6" height="6" rx="1"/>
+          <rect x="183" y="8" width="6" height="6" rx="1"/>
+          <rect x="193" y="8" width="6" height="6" rx="1"/>
+          <rect x="210" y="8" width="6" height="6" rx="1"/>
+          <rect x="220" y="8" width="6" height="6" rx="1"/>
+          <rect x="230" y="8" width="6" height="6" rx="1"/>
+          <rect x="240" y="8" width="6" height="6" rx="1"/>
+          <rect x="250" y="8" width="6" height="6" rx="1"/>
+          <rect x="260" y="8" width="6" height="6" rx="1"/>
+          <rect x="278" y="8" width="6" height="6" rx="1"/>
+          <rect x="288" y="8" width="6" height="6" rx="1"/>
+          <rect x="298" y="8" width="6" height="6" rx="1"/>
+          <rect x="308" y="8" width="6" height="6" rx="1"/>
+          <rect x="318" y="8" width="6" height="6" rx="1"/>
+          <!-- nose driver window (slightly larger / tilted) -->
+          <path d="M335 8 L344 8 L348 14 L335 14 Z"/>
+        </g>
+        <!-- Bogie skirts under each car -->
+        <rect x="14"  y="24" width="50" height="2" fill="#0a1430" opacity=".55"/>
+        <rect x="80"  y="24" width="50" height="2" fill="#0a1430" opacity=".55"/>
+        <rect x="147" y="24" width="50" height="2" fill="#0a1430" opacity=".55"/>
+        <rect x="214" y="24" width="50" height="2" fill="#0a1430" opacity=".55"/>
+        <rect x="281" y="24" width="60" height="2" fill="#0a1430" opacity=".55"/>
+        <!-- Front headlight glow -->
+        <circle cx="354" cy="18" r="2.2" fill="#fff7e0"/>
+        <circle cx="354" cy="18" r="4" fill="#fff7e0" opacity=".3"/>
       </svg>
     </div>
 
     <div class="track"></div>
     <div class="tram-wrap">
-      <!-- PeopleMover: 3 connected cars, blue & cream, bubble windows -->
-      <svg width="240" height="62" viewBox="0 0 240 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- PeopleMover: 4 open-top royal-blue + cream cars (current MK Mark IV) -->
+      <svg width="260" height="48" viewBox="0 0 260 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#5aa9d6"/>
-            <stop offset="55%" stop-color="#2e6fa8"/>
-            <stop offset="100%" stop-color="#1d4b7a"/>
+          <linearGradient id="pmHull" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#ffffff"/>
+            <stop offset="60%" stop-color="#e6e0d0"/>
+            <stop offset="100%" stop-color="#9a9484"/>
           </linearGradient>
-          <linearGradient id="window" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#fff7e0"/>
-            <stop offset="100%" stop-color="#f0a83a" stop-opacity=".55"/>
+          <linearGradient id="pmBlue" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#3a8fde"/>
+            <stop offset="55%" stop-color="#1f64bd"/>
+            <stop offset="100%" stop-color="#0e3f88"/>
+          </linearGradient>
+          <linearGradient id="pmBlueDark" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#1f64bd"/>
+            <stop offset="100%" stop-color="#0e3f88"/>
           </linearGradient>
         </defs>
 
+        <!-- A single car (reused via <use>) -->
+        <symbol id="pmCar" overflow="visible">
+          <!-- Cream lower hull (rounded bottom corners) -->
+          <path d="M0 22 L0 36 Q0 40 4 40 L52 40 Q56 40 56 36 L56 22 Z" fill="url(#pmHull)"/>
+          <!-- Blue inner trough at the top of the hull -->
+          <rect x="2" y="20" width="52" height="3" fill="url(#pmBlueDark)"/>
+          <!-- Tall blue seat back #1 -->
+          <path d="M3 22 L3 8 Q3 5 6 5 L24 5 Q27 5 27 8 L27 22 Z" fill="url(#pmBlue)"/>
+          <!-- Seat back highlight -->
+          <path d="M5 22 L5 9 Q5 7 7 7 L9 7 L9 22 Z" fill="#ffffff" opacity=".18"/>
+          <!-- Tall blue seat back #2 -->
+          <path d="M29 22 L29 8 Q29 5 32 5 L50 5 Q53 5 53 8 L53 22 Z" fill="url(#pmBlue)"/>
+          <path d="M31 22 L31 9 Q31 7 33 7 L35 7 L35 22 Z" fill="#ffffff" opacity=".18"/>
+          <!-- Subtle armrest divider between the two seats -->
+          <rect x="27" y="17" width="2" height="5" fill="#0e3f88" opacity=".5"/>
+          <!-- Under-skirt shadow -->
+          <rect x="3" y="40" width="50" height="2" fill="#0a1430" opacity=".45"/>
+        </symbol>
+
         <!-- Car 1 (rear) -->
-        <g transform="translate(0,8)">
-          <rect x="0" y="6" width="72" height="34" rx="9" fill="url(#carBody)"/>
-          <rect x="0" y="6" width="72" height="3" rx="2" fill="#f4ead5" opacity=".55"/>
-          <rect x="6" y="14" width="58" height="14" rx="6" fill="url(#window)"/>
-          <circle cx="20" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <rect x="2" y="38" width="68" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-        </g>
+        <use href="#pmCar" x="0"   y="2"/>
         <!-- Coupler -->
-        <rect x="72" y="22" width="6" height="4" fill="#3a4a6e"/>
+        <rect x="56" y="28" width="6" height="3" fill="#0e3f88" opacity=".7"/>
+        <!-- Car 2 -->
+        <use href="#pmCar" x="62"  y="2"/>
+        <rect x="118" y="28" width="6" height="3" fill="#0e3f88" opacity=".7"/>
+        <!-- Car 3 -->
+        <use href="#pmCar" x="124" y="2"/>
+        <rect x="180" y="28" width="6" height="3" fill="#0e3f88" opacity=".7"/>
+        <!-- Car 4 (front) -->
+        <use href="#pmCar" x="186" y="2"/>
 
-        <!-- Car 2 (middle) -->
-        <g transform="translate(78,8)">
-          <rect x="0" y="6" width="72" height="34" rx="9" fill="url(#carBody)"/>
-          <rect x="0" y="6" width="72" height="3" rx="2" fill="#f4ead5" opacity=".55"/>
-          <rect x="6" y="14" width="58" height="14" rx="6" fill="url(#window)"/>
-          <circle cx="20" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <rect x="2" y="38" width="68" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-        </g>
-        <!-- Coupler -->
-        <rect x="150" y="22" width="6" height="4" fill="#3a4a6e"/>
-
-        <!-- Car 3 (front) -->
-        <g transform="translate(156,8)">
-          <path d="M0 15 Q0 6 9 6 L66 6 Q72 6 76 12 L76 38 Q76 40 74 40 L0 40 Z" fill="url(#carBody)"/>
-          <path d="M0 15 Q0 6 9 6 L66 6 Q72 6 76 12 L76 9 Q72 6 66 6 L9 6 Q0 6 0 15 Z" fill="#f4ead5" opacity=".55"/>
-          <path d="M6 14 L62 14 Q68 14 70 18 L70 26 Q70 28 68 28 L6 28 Q4 28 4 26 L4 16 Q4 14 6 14 Z" fill="url(#window)"/>
-          <circle cx="20" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
-          <circle cx="62" cy="34" r="1.6" fill="#ffc266"/>
-          <rect x="2" y="38" width="72" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-        </g>
-
-        <!-- Headlight glow on front car -->
-        <circle cx="222" cy="42" r="6" fill="#ffc266" opacity=".25"/>
+        <!-- Soft warm glow at the front of the lead car -->
+        <circle cx="248" cy="30" r="5" fill="#ffd07a" opacity=".22"/>
       </svg>
     </div>
   </div>
