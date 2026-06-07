@@ -414,9 +414,15 @@
     /* On mobile, hide Space Mountain + occluder + spire light. The
        tram just glides across an open dark sky. Cleaner + faster. */
     .mtn-wrap, .scene::after, .spire-light { display: none; }
-    /* Without the mountain, the track + posts can span the full scene */
-    .track  { left: 4%; right: 4%; width: auto; height: 3px; }
-    .posts  { left: 4%; right: 4%; width: auto; }
+    /* Without the mountain, the track + posts can span the full scene.
+       Track moved up 5px so the tram's wheel-skirt sits ON the rail
+       (was floating 5px above it). Brighter silver for visibility. */
+    .track  {
+      left: 4%; right: 4%; width: auto; height: 3px; bottom: 65px;
+      background: linear-gradient(90deg, transparent 0%, #b8c4d4 8%, #d8e0ec 50%, #b8c4d4 92%, transparent 100%);
+      box-shadow: 0 0 8px rgba(184, 196, 212, .35);
+    }
+    .posts  { left: 4%; right: 4%; width: auto; height: 65px; }
   }
   @media (prefers-reduced-motion: reduce) {
     body::before, .strip .dot, .billboard, .ticker > span { animation: none; }
