@@ -217,8 +217,8 @@
   /* Slow-flashing red aircraft warning beacon on the tallest spire tip */
   .spire-light {
     position: absolute;
-    top: 38%;
-    left: 49%;
+    top: 21%;
+    left: 46%;
     width: 8px; height: 8px;
     margin-left: -4px; margin-top: -4px;
     border-radius: 50%;
@@ -408,12 +408,12 @@
     .eyebrow { font-size: 14px; letter-spacing: .35em; }
     .eyebrow::before, .eyebrow::after { width: 18px; }
     .tagline { margin-bottom: 44px; }
-    .scene { height: 280px; margin-bottom: 40px; }
+    .scene { height: 200px; margin-bottom: 40px; }
     .tram-wrap { transform: scale(.82); transform-origin: left bottom; }
     .strip { font-size: 15px; letter-spacing: .2em; padding: 6px 14px; }
-    /* Mountain shrinks on mobile so it doesn't dominate */
-    .mtn-wrap { right: -6%; bottom: -10%; height: 105%; }
-    .scene::after { height: 130px; }
+    /* On mobile, hide Space Mountain + occluder + spire light. The
+       tram just glides across an open dark sky. Cleaner + faster. */
+    .mtn-wrap, .scene::after, .spire-light { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     body::before, .strip .dot, .billboard, .ticker > span { animation: none; }
