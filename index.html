@@ -91,18 +91,20 @@
     text-align: center;
     position: relative;
   }
-  /* 4 silver bolt heads — one at each corner of the sign panel */
+  /* 4 silver bolt heads — one at each corner of the sign panel.
+     Insets are larger than the border-radius so the bolts sit comfortably
+     inside the rounded corners, not on the curve. */
   .sign::before, .sign::after {
     content: ""; position: absolute;
-    left: 8px; right: 8px;
+    left: 14px; right: 14px;
     height: 5px;
     pointer-events: none;
     background:
       radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) left  center / 5px 5px no-repeat,
       radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) right center / 5px 5px no-repeat;
   }
-  .sign::before { top: 6px; }
-  .sign::after  { bottom: 6px; }
+  .sign::before { top: 10px; }
+  .sign::after  { bottom: 10px; }
   .sign-overline {
     display: flex; align-items: center; justify-content: center;
     gap: 12px;
