@@ -134,26 +134,45 @@
     color: var(--cream); font-weight: 500;
   }
 
-  /* Tram + track scene */
+  /* Scene: monorail beam up top, PeopleMover track down low, Space Mtn behind */
   .scene {
     position: relative;
-    width: 100%; max-width: 720px;
-    height: 140px;
+    width: 100%; max-width: 760px;
+    height: 220px;
     margin-bottom: 56px;
     overflow: hidden;
   }
   .space-mtn {
     position: absolute;
-    right: 8%; bottom: 24px;
-    width: 110px; height: 90px;
+    right: 8%; bottom: 28px;
+    width: 130px; height: 150px;
     opacity: .85;
     pointer-events: none;
   }
   @media (max-width: 520px) {
-    .space-mtn { right: 4%; width: 84px; height: 70px; }
+    .space-mtn { right: 4%; width: 100px; height: 116px; }
   }
+  /* Monorail beam (elevated) */
+  .beam {
+    position: absolute; left: 0; right: 0; top: 46px; height: 6px;
+    background: linear-gradient(90deg, transparent 0%, #2a3a5e 12%, #3a4a6e 50%, #2a3a5e 88%, transparent 100%);
+    border-radius: 2px;
+  }
+  .beam::after {
+    content: ""; position: absolute; left: 12%; right: 12%; top: 6px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,.5), transparent);
+  }
+  .monorail-wrap {
+    position: absolute; top: 14px; left: -220px;
+    animation: glide-mono 26s linear infinite;
+  }
+  @keyframes glide-mono {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 220px)); }
+  }
+  /* PeopleMover track (ground level) */
   .track {
-    position: absolute; left: 0; right: 0; bottom: 28px; height: 2px;
+    position: absolute; left: 0; right: 0; bottom: 34px; height: 2px;
     background: linear-gradient(90deg, transparent 0%, var(--rail) 12%, var(--rail) 88%, transparent 100%);
   }
   .track::after {
@@ -162,14 +181,14 @@
     filter: blur(2px);
   }
   .tram-wrap {
-    position: absolute; bottom: 30px; left: -260px;
+    position: absolute; bottom: 36px; left: -260px;
     animation: glide 22s linear infinite;
   }
   @keyframes glide {
     0%   { transform: translateX(0); }
     100% { transform: translateX(calc(100vw + 260px)); }
   }
-  .tram-wrap svg { display: block; }
+  .tram-wrap svg, .monorail-wrap svg { display: block; }
 
   /* Tiny info strip */
   .strip {
@@ -194,32 +213,20 @@
     50%      { opacity: .25; }
   }
 
-  footer {
-    position: fixed; bottom: 22px; left: 0; right: 0;
-    text-align: center;
-    font-family: 'VT323', monospace;
-    font-size: 14px;
-    letter-spacing: .32em;
-    text-transform: uppercase;
-    color: rgba(244,234,213,.32);
-    z-index: 2;
-  }
-  footer a { color: inherit; text-decoration: none; transition: color .25s; }
-  footer a:hover { color: var(--amber); }
-
   @media (max-width: 520px) {
     main { padding: 50px 18px 90px; }
     .eyebrow { font-size: 14px; letter-spacing: .35em; }
     .eyebrow::before, .eyebrow::after { width: 18px; }
     .tagline { margin-bottom: 44px; }
-    .scene { height: 90px; margin-bottom: 40px; }
+    .scene { height: 190px; margin-bottom: 40px; }
     .tram-wrap { transform: scale(.78); transform-origin: left bottom; }
+    .monorail-wrap { transform: scale(.78); transform-origin: left top; }
     .strip { font-size: 15px; letter-spacing: .2em; padding: 6px 14px; }
-    footer { font-size: 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
     body::before, h1 em, .strip .dot { animation: none; }
-    .tram-wrap { animation: none; left: 50%; transform: translateX(-50%); }
+    .tram-wrap, .monorail-wrap { animation: none; left: auto; right: 8%; }
+    .tram-wrap { left: 8%; right: auto; }
   }
 </style>
 </head>
@@ -228,7 +235,7 @@
   <div class="eyebrow">Tomorrowland Transit Authority · WEDway</div>
   <h1>Please stand clear<br>of the <em>doors</em>.</h1>
   <p class="esp"><em>Por favor manténgase alejado de las puertas.</em></p>
-  <p class="tagline">A love letter from <strong>Quinn</strong>, <strong>Lisa</strong> &amp; <strong>Jim</strong><br>to the best ride in the Magic Kingdom.</p>
+  <p class="tagline">A love letter to <strong>the slow blue tram</strong><br>and <strong>the silver bullet</strong> overhead.</p>
 
   <div class="scene" aria-hidden="true">
     <!-- Space Mountain silhouette in the distance -->
@@ -246,6 +253,49 @@
       <circle cx="90" cy="6" r="1.4" fill="#ffc266"/>
       <circle cx="90" cy="6" r="3" fill="#ffc266" opacity=".25"/>
     </svg>
+    <!-- Monorail beam + train (upper) -->
+    <div class="beam"></div>
+    <div class="monorail-wrap">
+      <svg width="280" height="38" viewBox="0 0 280 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="monoBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#f4ead5"/>
+            <stop offset="55%" stop-color="#cdc4ad"/>
+            <stop offset="100%" stop-color="#8a8470"/>
+          </linearGradient>
+          <linearGradient id="monoStripe" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"  stop-color="#d94a3a"/>
+            <stop offset="100%" stop-color="#a82c1f"/>
+          </linearGradient>
+          <linearGradient id="monoWindow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9ed8ea"/>
+            <stop offset="100%" stop-color="#3a6b8a"/>
+          </linearGradient>
+        </defs>
+        <!-- Nose car: sleek bullet -->
+        <path d="M278 12 Q278 6 270 5 L196 5 Q190 5 188 8 L188 26 Q188 30 192 30 L274 30 Q278 30 278 26 Z" fill="url(#monoBody)"/>
+        <!-- Mid car -->
+        <rect x="100" y="6" width="84" height="24" rx="5" fill="url(#monoBody)"/>
+        <!-- Tail car -->
+        <path d="M2 12 Q2 6 10 5 L92 5 Q96 5 96 9 L96 26 Q96 30 92 30 L8 30 Q2 30 2 26 Z" fill="url(#monoBody)"/>
+        <!-- Iconic red side stripe across all cars -->
+        <rect x="2"   y="20" width="94"  height="3" fill="url(#monoStripe)"/>
+        <rect x="100" y="20" width="84"  height="3" fill="url(#monoStripe)"/>
+        <rect x="188" y="20" width="90"  height="3" fill="url(#monoStripe)"/>
+        <!-- Windows: long continuous strip per car -->
+        <rect x="10"  y="9" width="80" height="9" rx="3" fill="url(#monoWindow)"/>
+        <rect x="104" y="9" width="76" height="9" rx="3" fill="url(#monoWindow)"/>
+        <rect x="194" y="9" width="76" height="9" rx="3" fill="url(#monoWindow)"/>
+        <!-- Nose headlight -->
+        <circle cx="274" cy="14" r="1.6" fill="#ffe7a3"/>
+        <circle cx="274" cy="14" r="3.5" fill="#ffe7a3" opacity=".25"/>
+        <!-- Bogie shadows under each car -->
+        <rect x="20"  y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
+        <rect x="112" y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
+        <rect x="204" y="30" width="60" height="2" fill="#0a1430" opacity=".5"/>
+      </svg>
+    </div>
+
     <div class="track"></div>
     <div class="tram-wrap">
       <!-- PeopleMover: 3 connected cars, blue & cream, bubble windows -->
@@ -270,7 +320,6 @@
           <circle cx="20" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
           <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
           <rect x="2" y="38" width="68" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-          <text x="36" y="51" font-family="VT323, monospace" font-size="9" fill="#f4ead5" opacity=".55" text-anchor="middle" letter-spacing="2">QUINN</text>
         </g>
         <!-- Coupler -->
         <rect x="72" y="22" width="6" height="4" fill="#3a4a6e"/>
@@ -283,7 +332,6 @@
           <circle cx="20" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
           <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
           <rect x="2" y="38" width="68" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-          <text x="36" y="51" font-family="VT323, monospace" font-size="9" fill="#f4ead5" opacity=".55" text-anchor="middle" letter-spacing="2">LISA</text>
         </g>
         <!-- Coupler -->
         <rect x="150" y="22" width="6" height="4" fill="#3a4a6e"/>
@@ -297,7 +345,6 @@
           <circle cx="44" cy="21" r="3.2" fill="#0a1430" opacity=".75"/>
           <circle cx="62" cy="34" r="1.6" fill="#ffc266"/>
           <rect x="2" y="38" width="72" height="3" rx="1.5" fill="#0a1430" opacity=".4"/>
-          <text x="36" y="51" font-family="VT323, monospace" font-size="9" fill="#f4ead5" opacity=".55" text-anchor="middle" letter-spacing="2">JIM</text>
         </g>
 
         <!-- Headlight glow on front car -->
@@ -312,8 +359,5 @@
   </div>
 </main>
 
-<footer>
-  <a href="https://jimdufek.com/">jimdufek.com →</a>
-</footer>
 </body>
 </html>
