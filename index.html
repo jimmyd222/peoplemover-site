@@ -91,13 +91,18 @@
     text-align: center;
     position: relative;
   }
-  /* Tiny screw heads in each corner for that signage realness */
+  /* 4 silver bolt heads — one at each corner of the sign panel */
   .sign::before, .sign::after {
-    content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #f4f1ea 0%, #6b7180 60%, #2a3142 100%);
+    content: ""; position: absolute;
+    left: 8px; right: 8px;
+    height: 5px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) left  center / 5px 5px no-repeat,
+      radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) right center / 5px 5px no-repeat;
   }
-  .sign::before { top: 6px; left: 8px; box-shadow: calc(100% + 11px) 0 0 0 #2a3142, calc(100% + 11px) 0 0 0; }
-  .sign::after  { bottom: 6px; left: 8px; }
+  .sign::before { top: 6px; }
+  .sign::after  { bottom: 6px; }
   .sign-overline {
     display: flex; align-items: center; justify-content: center;
     gap: 12px;
@@ -151,13 +156,15 @@
     margin-right: 1px;
     text-shadow: 0 0 6px var(--teal-glow);
   }
-  /* The bolt holding it onto the main sign */
+  /* Two bolts holding the .me tag onto the main sign — symmetric */
   .sign-tag::before {
     content: ""; position: absolute;
-    top: -3px; left: 10px;
-    width: 5px; height: 5px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #f4f1ea 0%, #6b7180 60%, #2a3142 100%);
-    box-shadow: 0 1px 1px rgba(0,0,0,.6);
+    top: -3px; left: 8px; right: 8px;
+    height: 5px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) left  center / 5px 5px no-repeat,
+      radial-gradient(circle, #f4f1ea 0%, #6b7180 55%, #2a3142 100%) right center / 5px 5px no-repeat;
   }
   .tagline {
     font-family: 'Outfit', sans-serif;
