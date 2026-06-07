@@ -16,23 +16,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Outfit:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a1430;
-    --bg-deeper: #050a1c;
+    --bg: #1a4a5c;              /* retro vintage teal */
+    --bg-deeper: #0d2c38;
+    --bg-deepest: #061a23;
     --cream: #f4ead5;
-    --cream-dim: #b9ad94;
-    --pm-blue: #1f7ad6;        /* PeopleMover signage royal blue */
+    --cream-dim: #c4b89a;
+    --pm-blue: #1f7ad6;
     --pm-blue-deep: #0e54a6;
-    --pm-silver: #c8cdd4;       /* PeopleMover hull silver */
-    --teal: #2bbfd6;            /* Monorail Teal */
-    --teal-glow: #6fe0f0;
-    --rail: #3a4a6e;
+    --pm-silver: #e8ebf0;
+    --teal: #5bd0e0;
+    --teal-glow: #9be8f0;
+    --rail: #2c5e6c;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   body {
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
     background:
-      radial-gradient(ellipse at 50% 30%, #1a2855 0%, var(--bg) 45%, var(--bg-deeper) 100%);
+      radial-gradient(ellipse at 50% 25%, #2a6878 0%, var(--bg) 40%, var(--bg-deeper) 75%, var(--bg-deepest) 100%);
     color: var(--cream);
     min-height: 100vh;
     overflow-x: hidden;
@@ -125,6 +126,39 @@
       0 2px 0 rgba(0,0,0,.25),
       0 0 24px rgba(255,255,255,.18);
   }
+  /* Bolted-on .me sub-plaque — hangs off the bottom-right of the main sign */
+  .sign-tag {
+    position: absolute;
+    right: -14px; bottom: -18px;
+    padding: 5px 14px 6px;
+    background: linear-gradient(180deg, #18233f 0%, #0c1530 100%);
+    border: 1px solid rgba(123,227,255,.35);
+    border-radius: 3px;
+    transform: rotate(-4deg);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: .04em;
+    color: var(--teal);
+    text-shadow: 0 0 10px rgba(43,191,214,.55);
+    box-shadow:
+      0 4px 10px rgba(0,0,0,.5),
+      inset 0 1px 0 rgba(255,255,255,.1);
+    z-index: 2;
+  }
+  .sign-tag .dot {
+    color: var(--teal-glow);
+    margin-right: 1px;
+    text-shadow: 0 0 6px var(--teal-glow);
+  }
+  /* The bolt holding it onto the main sign */
+  .sign-tag::before {
+    content: ""; position: absolute;
+    top: -3px; left: 10px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f4f1ea 0%, #6b7180 60%, #2a3142 100%);
+    box-shadow: 0 1px 1px rgba(0,0,0,.6);
+  }
   .tagline {
     font-family: 'Outfit', sans-serif;
     font-weight: 300;
@@ -146,6 +180,15 @@
     height: 340px;
     margin-bottom: 56px;
     overflow: hidden;
+  }
+  /* Comet swoosh — vintage Tomorrowland sky element */
+  .comet {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: .7;
+    pointer-events: none;
   }
   /* Space Mountain dominates the right ~55% of the scene with the portal on its left face */
   .space-mtn {
@@ -347,10 +390,28 @@
       <span class="rule"></span>
     </div>
     <div class="sign-name">PEOPLEMOVER</div>
+    <!-- Bolted-on .me sub-plaque -->
+    <span class="sign-tag" aria-label="dot me">
+      <span class="dot">.</span>me
+    </span>
   </div>
   <p class="tagline">A love letter to <strong>the slow blue tram</strong><br>that hums you through tomorrow.</p>
 
   <div class="scene" aria-hidden="true">
+    <!-- Comet swoosh streaking across the night sky -->
+    <svg class="comet" viewBox="0 0 820 340" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cometGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#fbf6e8" stop-opacity="0"/>
+          <stop offset="70%" stop-color="#fbf6e8" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#fbf6e8" stop-opacity=".9"/>
+        </linearGradient>
+      </defs>
+      <path d="M -20 220 Q 250 -40, 720 60" stroke="url(#cometGrad)" stroke-width="2" fill="none"/>
+      <circle cx="720" cy="60" r="3" fill="#fbf6e8"/>
+      <circle cx="720" cy="60" r="7" fill="#fbf6e8" opacity=".25"/>
+    </svg>
+
     <!-- Coral Moons billboard — the in-ride ad you pass on the PeopleMover -->
     <div class="billboard" aria-hidden="true">
       <div class="billboard-frame">
@@ -366,129 +427,124 @@
       <div class="billboard-post"></div>
     </div>
 
-    <!-- Space Mountain — wide dome with ribbed cone + small spire crown -->
+    <!-- Space Mountain — retro stylized: angular multi-peaked silhouette, banded body, central spire cluster -->
     <svg class="space-mtn" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
       <defs>
         <linearGradient id="mtnFace" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#f4f5f7"/>
-          <stop offset="45%" stop-color="#d8dce4"/>
-          <stop offset="100%" stop-color="#7c8492"/>
+          <stop offset="0%"  stop-color="#fbf6e8"/>
+          <stop offset="60%" stop-color="#e8e0c8"/>
+          <stop offset="100%" stop-color="#a89a78"/>
         </linearGradient>
-        <linearGradient id="mtnShade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#2a3550" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#0a1430" stop-opacity=".5"/>
+        <linearGradient id="mtnShade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#0d2c38" stop-opacity=".0"/>
+          <stop offset="100%" stop-color="#0d2c38" stop-opacity=".35"/>
         </linearGradient>
         <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"  stop-color="#7be3ff" stop-opacity=".85"/>
-          <stop offset="60%" stop-color="#2b7dbf" stop-opacity=".35"/>
-          <stop offset="100%" stop-color="#0a1430" stop-opacity="0"/>
+          <stop offset="0%"  stop-color="#9be8f0" stop-opacity=".9"/>
+          <stop offset="60%" stop-color="#2b7d9f" stop-opacity=".4"/>
+          <stop offset="100%" stop-color="#061a23" stop-opacity="0"/>
         </radialGradient>
       </defs>
 
-      <!-- Lower base building (extends edge-to-edge so it occludes the tram fully) -->
-      <rect x="0" y="252" width="480" height="28" fill="#1a2440"/>
-      <rect x="0" y="252" width="480" height="2"  fill="#3a4a6e"/>
-      <!-- Cantilevered overhang detail along the base (a subtle step) -->
-      <path d="M 0 246 L 60 246 L 70 252 L 410 252 L 420 246 L 480 246 L 480 252 L 0 252 Z" fill="#1a2440" opacity=".85"/>
+      <!-- Base building band (occludes tram fully, edge-to-edge) -->
+      <rect x="0" y="254" width="480" height="26" fill="#0d2c38"/>
+      <rect x="0" y="252" width="480" height="3" fill="#2c5e6c" opacity=".7"/>
 
-      <!-- Main dome silhouette — wide bell, edge-to-edge -->
-      <path d="M 0 252
-               C 10 218, 55 170, 115 132
-               C 165 102, 200 84, 220 78
-               L 260 78
-               C 280 84, 315 102, 365 132
-               C 425 170, 470 218, 480 252
+      <!-- Wide base body — gentle curved bottom flaring into the angular sides -->
+      <path d="M 0 254
+               L 0 240
+               Q 30 218, 80 198
+               L 130 152
+               L 168 110
+               L 195 92
+               L 215 92
+               L 240 70
+               L 265 92
+               L 285 92
+               L 312 110
+               L 350 152
+               L 400 198
+               Q 450 218, 480 240
+               L 480 254
                Z"
             fill="url(#mtnFace)"/>
-      <path d="M 0 252
-               C 10 218, 55 170, 115 132
-               C 165 102, 200 84, 220 78
-               L 260 78
-               C 280 84, 315 102, 365 132
-               C 425 170, 470 218, 480 252
+      <!-- Right-side shading wash -->
+      <path d="M 0 254
+               L 0 240
+               Q 30 218, 80 198
+               L 130 152
+               L 168 110
+               L 195 92
+               L 215 92
+               L 240 70
+               L 265 92
+               L 285 92
+               L 312 110
+               L 350 152
+               L 400 198
+               Q 450 218, 480 240
+               L 480 254
                Z"
             fill="url(#mtnShade)"/>
 
-      <!-- Horizontal latitude bands across the dome (visible in the logos) -->
-      <g stroke="#7a8294" stroke-width=".5" opacity=".5" fill="none">
-        <path d="M 18 230 Q 240 200, 462 230"/>
-        <path d="M 35 200 Q 240 168, 445 200"/>
-        <path d="M 60 168 Q 240 138, 420 168"/>
-        <path d="M 95 138 Q 240 114, 385 138"/>
+      <!-- Bold horizontal bands across the lower body (the illustrated banding) -->
+      <g fill="#0d2c38" opacity=".75">
+        <rect x="0" y="244" width="480" height="3"/>
+        <rect x="20" y="232" width="440" height="2"/>
+        <rect x="40" y="220" width="400" height="2"/>
+        <rect x="60" y="208" width="360" height="1.5"/>
       </g>
 
-      <!-- Vertical fluted ridges — fan out from the drum edge across the dome -->
-      <g stroke="#8a92a4" stroke-width=".7" opacity=".55" fill="none">
-        <path d="M218 80 Q140 160, 30  252"/>
-        <path d="M220 80 Q150 160, 60  252"/>
-        <path d="M223 80 Q165 160, 100 252"/>
-        <path d="M227 80 Q185 160, 145 252"/>
-        <path d="M232 80 Q205 160, 190 252"/>
-        <path d="M237 80 Q225 160, 222 252"/>
-        <path d="M243 80 Q255 160, 258 252"/>
-        <path d="M248 80 Q275 160, 290 252"/>
-        <path d="M253 80 Q295 160, 335 252"/>
-        <path d="M257 80 Q315 160, 380 252"/>
-        <path d="M260 80 Q330 160, 420 252"/>
-        <path d="M262 80 Q340 160, 450 252"/>
-      </g>
-      <!-- Subtle front-edge highlights -->
-      <path d="M222 80 Q150 160, 50 252"  stroke="#ffffff" stroke-width=".9" opacity=".32" fill="none"/>
-      <path d="M258 80 Q330 160, 430 252" stroke="#ffffff" stroke-width=".7" opacity=".2"  fill="none"/>
-
-      <!-- The DRUM / circular cap at the apex -->
-      <ellipse cx="240" cy="80" rx="24" ry="3.6" fill="#e8ebf0"/>
-      <ellipse cx="240" cy="80" rx="24" ry="3.6" fill="none" stroke="#7a8294" stroke-width=".5" opacity=".7"/>
-      <path d="M216 80 Q228 76 240 76 Q252 76 264 80" stroke="#ffffff" stroke-width=".6" opacity=".75" fill="none"/>
-
-      <!-- ICONIC SPIRE CROWN — spread across the top, varying heights, traced from the refs -->
-      <g stroke="#f4f5f7" stroke-width="1" stroke-linecap="round" fill="none">
-        <!-- Outer left stubs -->
-        <line x1="200" y1="84" x2="194" y2="58"/>
-        <line x1="208" y1="82" x2="204" y2="46"/>
-        <!-- Mid-left spires -->
-        <line x1="215" y1="80" x2="212" y2="32"/>
-        <line x1="220" y1="80" x2="219" y2="20"/>
-        <!-- Tall left-of-center (with light cross-braces) -->
-        <line x1="226" y1="79" x2="226" y2="10"/>
-        <line x1="223" y1="22" x2="229" y2="22" stroke-width=".6"/>
-        <line x1="223" y1="34" x2="229" y2="34" stroke-width=".6"/>
-        <!-- Tallest CENTER spire with full cross-brace ladder -->
-        <line x1="240" y1="78" x2="240" y2="4"/>
-        <line x1="236" y1="10" x2="244" y2="10" stroke-width=".6"/>
-        <line x1="235" y1="18" x2="245" y2="18" stroke-width=".7"/>
-        <line x1="234" y1="28" x2="246" y2="28" stroke-width=".75"/>
-        <line x1="233" y1="40" x2="247" y2="40" stroke-width=".8"/>
-        <line x1="232" y1="54" x2="248" y2="54" stroke-width=".8"/>
-        <!-- Tall right-of-center -->
-        <line x1="254" y1="79" x2="254" y2="10"/>
-        <line x1="251" y1="22" x2="257" y2="22" stroke-width=".6"/>
-        <line x1="251" y1="34" x2="257" y2="34" stroke-width=".6"/>
-        <!-- Mid-right spires -->
-        <line x1="260" y1="80" x2="261" y2="20"/>
-        <line x1="265" y1="80" x2="268" y2="32"/>
-        <!-- Outer right stubs -->
-        <line x1="272" y1="82" x2="276" y2="46"/>
-        <line x1="280" y1="84" x2="286" y2="58"/>
+      <!-- Vertical ridge lines fanning down from the peak structure -->
+      <g stroke="#0d2c38" stroke-width="1.2" opacity=".55" fill="none">
+        <path d="M 215 95 L 80  252"/>
+        <path d="M 220 95 L 120 252"/>
+        <path d="M 225 95 L 155 252"/>
+        <path d="M 230 95 L 188 252"/>
+        <path d="M 235 95 L 215 252"/>
+        <path d="M 240 75 L 240 252"/>
+        <path d="M 245 95 L 265 252"/>
+        <path d="M 250 95 L 292 252"/>
+        <path d="M 255 95 L 325 252"/>
+        <path d="M 260 95 L 360 252"/>
+        <path d="M 265 95 L 400 252"/>
       </g>
 
-      <!-- Glowing tip on the tallest spire -->
-      <circle cx="240" cy="4" r="1.8" fill="#7be3ff"/>
-      <circle cx="240" cy="4" r="4.5" fill="#7be3ff" opacity=".45"/>
+      <!-- Side wing-peak inner shadows (gives the angular wings depth) -->
+      <g fill="#0d2c38" opacity=".3">
+        <path d="M 168 110 L 195 92 L 195 110 Z"/>
+        <path d="M 312 110 L 285 92 L 285 110 Z"/>
+      </g>
 
-      <!-- Dark arched portal where the PeopleMover enters — on the LEFT face of the dome -->
-      <path d="M 78 240
-               Q 78 222, 96 222
-               L 152 222
-               Q 170 222, 170 240
-               L 170 258
-               L 78 258 Z"
-            fill="#050a1c"/>
-      <!-- Soft teal portal glow -->
-      <ellipse cx="124" cy="240" rx="52" ry="24" fill="url(#portalGlow)" opacity=".8"/>
-      <!-- Portal frame highlight -->
-      <path d="M 78 240 Q 78 222, 96 222 L 152 222 Q 170 222, 170 240"
-            stroke="#3a6b8a" stroke-width="1.2" fill="none" opacity=".75"/>
+      <!-- Central spire cluster — 3 thin needles, vintage poster style -->
+      <g stroke="#fbf6e8" stroke-width="2.4" stroke-linecap="round" fill="none">
+        <!-- Tallest center spire -->
+        <line x1="240" y1="72" x2="240" y2="8"/>
+        <!-- Left flanking spire (a bit shorter, slight lean) -->
+        <line x1="232" y1="80" x2="228" y2="24"/>
+        <!-- Right flanking spire (a bit shorter, slight lean) -->
+        <line x1="248" y1="80" x2="252" y2="24"/>
+      </g>
+      <!-- Subtle outer mini spires -->
+      <g stroke="#fbf6e8" stroke-width="1.6" stroke-linecap="round" fill="none">
+        <line x1="220" y1="90" x2="216" y2="50"/>
+        <line x1="260" y1="90" x2="264" y2="50"/>
+      </g>
+      <!-- Tiny glow at the tip -->
+      <circle cx="240" cy="8" r="2.2" fill="#9be8f0"/>
+      <circle cx="240" cy="8" r="6" fill="#9be8f0" opacity=".4"/>
+
+      <!-- Dark arched portal where the PeopleMover enters — on the LEFT face -->
+      <path d="M 70 232
+               Q 70 214, 88 214
+               L 144 214
+               Q 162 214, 162 232
+               L 162 252
+               L 70 252 Z"
+            fill="#020e15"/>
+      <ellipse cx="116" cy="232" rx="52" ry="22" fill="url(#portalGlow)" opacity=".8"/>
+      <path d="M 70 232 Q 70 214, 88 214 L 144 214 Q 162 214, 162 232"
+            stroke="#5bd0e0" stroke-width="1.2" fill="none" opacity=".7"/>
     </svg>
 
 
