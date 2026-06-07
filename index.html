@@ -181,12 +181,12 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Mountain wrapper — top of the z-stack so nothing draws over it */
+  /* Mountain wrapper — pushed further right so silhouette covers scene's right edge */
   .mtn-wrap {
     position: absolute;
-    right: -4%;
+    right: -10%;
     bottom: -14%;
-    height: 122%;
+    height: 124%;
     aspect-ratio: 750 / 500;
     z-index: 5;
     pointer-events: none;
@@ -198,18 +198,19 @@
     opacity: 1;
     filter: brightness(.85);
   }
-  /* Tram occluder — sits BETWEEN the tram (z:2) and the mountain (z:5).
-     Tall enough to fully cover the tram's vertical range, and gradient
-     fades to fully transparent at the top so no hard edge is visible.
-     The mountain renders OVER this layer (higher z), so the bottom of
-     the silhouette doesn't get erased. */
+  /* Tram occluder — full-width gradient masked horizontally so it only
+     darkens the RIGHT side of the scene where the mountain is. The
+     left side stays clear so the track + posts remain visible. No
+     visible vertical edges because the horizontal mask fades smoothly
+     and the vertical gradient fades smoothly into the page bg. */
   .scene::after {
     content: "";
     position: absolute;
-    right: 0; bottom: 0;
-    width: 72%;
-    height: 140px;
-    background: linear-gradient(180deg, transparent 0%, transparent 25%, var(--bg-deeper) 80%, var(--bg-deepest) 100%);
+    left: 0; right: 0; bottom: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, transparent 8%, var(--bg-deeper) 45%, var(--bg-deepest) 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 30%, #000 55%, #000 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, transparent 30%, #000 55%, #000 100%);
     z-index: 3;
     pointer-events: none;
   }
