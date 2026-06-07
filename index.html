@@ -181,40 +181,42 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Wrapper holds the image + the red spire light so they scale together */
+  /* Wrapper sized to the PNG's aspect ratio so spire-light % is reliable.
+     Shifted slightly right + bottom so the silhouette extends to scene
+     edges and fully occludes the tram. */
   .mtn-wrap {
     position: absolute;
-    right: 0; bottom: 0;
-    height: 100%;
+    right: -4%;
+    bottom: -6%;
+    height: 112%;
+    aspect-ratio: 750 / 500;
     z-index: 3;
     pointer-events: none;
   }
   .mtn-wrap .space-mtn {
     display: block;
+    width: 100%;
     height: 100%;
-    width: auto;
-    /* The PNG body is white; the detail lines are black. On the dark blue
-       page, the white reads cleanly and the black blends into the sky. */
+    /* Mute the white slightly so it doesn't blow out against the dark sky */
+    opacity: .82;
+    filter: brightness(.92);
   }
-  /* Slow-flashing red aircraft warning light atop the tallest spire.
-     left/top calibrated to the spire tip position in the PNG. */
+  /* Slow-flashing red aircraft warning beacon on the tallest spire tip.
+     Percentages are relative to .mtn-wrap, which matches the PNG aspect ratio. */
   .spire-light {
     position: absolute;
-    top: 14%;
-    left: 45%;
-    width: 7px; height: 7px;
-    margin-left: -3.5px; margin-top: -3.5px;
+    top: 20%;
+    left: 47%;
+    width: 8px; height: 8px;
+    margin-left: -4px; margin-top: -4px;
     border-radius: 50%;
     background: #ff3a3a;
-    box-shadow:
-      0 0 6px 2px rgba(255,58,58,.85),
-      0 0 14px 4px rgba(255,58,58,.4);
-    animation: spire-blink 2.6s ease-in-out infinite;
+    animation: spire-blink 2.8s ease-in-out infinite;
   }
   @keyframes spire-blink {
     0%, 100% {
       opacity: 1;
-      box-shadow: 0 0 8px 3px rgba(255,58,58,.95), 0 0 18px 6px rgba(255,58,58,.5);
+      box-shadow: 0 0 8px 3px rgba(255,58,58,.95), 0 0 20px 7px rgba(255,58,58,.55);
     }
     50% {
       opacity: .25;
@@ -223,18 +225,6 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .spire-light { animation: none; }
-  }
-  /* Dark base bar — safety net under the silhouette so tram disappears cleanly */
-  .mtn-base {
-    position: absolute;
-    right: 0; bottom: 0; left: 28%;
-    height: 22px;
-    background: linear-gradient(180deg, #0a1430 0%, #050a1c 100%);
-    z-index: 4;
-    pointer-events: none;
-  }
-  @media (max-width: 520px) {
-    .mtn-base { left: 18%; }
   }
   /* Track runs from the left edge of the scene to the portal on the mountain's left face */
   .track {
@@ -454,8 +444,6 @@
       <img class="space-mtn" src="space-mountain-transparent.png" alt="" loading="eager" decoding="async"/>
       <span class="spire-light" aria-hidden="true"></span>
     </div>
-    <!-- Dark base bar — safety net to fully occlude the tram at track level -->
-    <div class="mtn-base"></div>
 
 
     <div class="posts"></div>
