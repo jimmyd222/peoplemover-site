@@ -150,14 +150,14 @@
   /* Space Mountain dominates the right ~55% of the scene with the portal on its left face */
   .space-mtn {
     position: absolute;
-    right: 0; bottom: 0;
-    width: 55%; min-width: 360px; max-width: 560px;
+    right: -2%; bottom: 0;
+    width: 58%; min-width: 380px; max-width: 580px;
     height: 100%;
     pointer-events: none;
     z-index: 3;
   }
   @media (max-width: 520px) {
-    .space-mtn { width: 62%; min-width: 240px; }
+    .space-mtn { right: -4%; width: 66%; min-width: 260px; }
   }
   /* Track runs from the left edge of the scene to the portal on the mountain's left face */
   .track {
@@ -385,86 +385,96 @@
         </radialGradient>
       </defs>
 
-      <!-- Lower base building strip (the dark band at the structure base) -->
-      <rect x="20" y="258" width="440" height="22" fill="#1b2540"/>
-      <rect x="20" y="258" width="440" height="2"  fill="#3a4a6e"/>
+      <!-- Lower base building (extends edge-to-edge so it occludes the tram fully) -->
+      <rect x="0" y="252" width="480" height="28" fill="#1a2440"/>
+      <rect x="0" y="252" width="480" height="2"  fill="#3a4a6e"/>
+      <!-- Cantilevered overhang detail along the base (a subtle step) -->
+      <path d="M 0 246 L 60 246 L 70 252 L 410 252 L 420 246 L 480 246 L 480 252 L 0 252 Z" fill="#1a2440" opacity=".85"/>
 
-      <!-- Main dome silhouette — wide bell curve with a small flat top for the drum -->
-      <path d="M 30 258
-               C 30 222, 65 175, 120 138
-               C 165 108, 200 88, 222 80
-               L 258 80
-               C 280 88, 315 108, 360 138
-               C 415 175, 450 222, 450 258
+      <!-- Main dome silhouette — wide bell, edge-to-edge -->
+      <path d="M 0 252
+               C 10 218, 55 170, 115 132
+               C 165 102, 200 84, 220 78
+               L 260 78
+               C 280 84, 315 102, 365 132
+               C 425 170, 470 218, 480 252
                Z"
             fill="url(#mtnFace)"/>
-      <path d="M 30 258
-               C 30 222, 65 175, 120 138
-               C 165 108, 200 88, 222 80
-               L 258 80
-               C 280 88, 315 108, 360 138
-               C 415 175, 450 222, 450 258
+      <path d="M 0 252
+               C 10 218, 55 170, 115 132
+               C 165 102, 200 84, 220 78
+               L 260 78
+               C 280 84, 315 102, 365 132
+               C 425 170, 470 218, 480 252
                Z"
             fill="url(#mtnShade)"/>
 
-      <!-- Vertical fluted ridges — emerge from the flat drum edge, NOT a single point -->
+      <!-- Horizontal latitude bands across the dome (visible in the logos) -->
+      <g stroke="#7a8294" stroke-width=".5" opacity=".5" fill="none">
+        <path d="M 18 230 Q 240 200, 462 230"/>
+        <path d="M 35 200 Q 240 168, 445 200"/>
+        <path d="M 60 168 Q 240 138, 420 168"/>
+        <path d="M 95 138 Q 240 114, 385 138"/>
+      </g>
+
+      <!-- Vertical fluted ridges — fan out from the drum edge across the dome -->
       <g stroke="#8a92a4" stroke-width=".7" opacity=".55" fill="none">
-        <path d="M222 82 Q145 160, 55  258"/>
-        <path d="M225 82 Q160 160, 95  258"/>
-        <path d="M228 82 Q175 160, 135 258"/>
-        <path d="M232 82 Q190 160, 175 258"/>
-        <path d="M236 82 Q210 160, 210 258"/>
-        <path d="M244 82 Q270 160, 270 258"/>
-        <path d="M248 82 Q290 160, 305 258"/>
-        <path d="M252 82 Q305 160, 345 258"/>
-        <path d="M255 82 Q320 160, 385 258"/>
-        <path d="M258 82 Q335 160, 425 258"/>
+        <path d="M218 80 Q140 160, 30  252"/>
+        <path d="M220 80 Q150 160, 60  252"/>
+        <path d="M223 80 Q165 160, 100 252"/>
+        <path d="M227 80 Q185 160, 145 252"/>
+        <path d="M232 80 Q205 160, 190 252"/>
+        <path d="M237 80 Q225 160, 222 252"/>
+        <path d="M243 80 Q255 160, 258 252"/>
+        <path d="M248 80 Q275 160, 290 252"/>
+        <path d="M253 80 Q295 160, 335 252"/>
+        <path d="M257 80 Q315 160, 380 252"/>
+        <path d="M260 80 Q330 160, 420 252"/>
+        <path d="M262 80 Q340 160, 450 252"/>
       </g>
       <!-- Subtle front-edge highlights -->
-      <path d="M226 82 Q158 160, 90 258" stroke="#ffffff" stroke-width="1" opacity=".35" fill="none"/>
-      <path d="M254 82 Q322 160, 390 258" stroke="#ffffff" stroke-width=".8" opacity=".2" fill="none"/>
+      <path d="M222 80 Q150 160, 50 252"  stroke="#ffffff" stroke-width=".9" opacity=".32" fill="none"/>
+      <path d="M258 80 Q330 160, 430 252" stroke="#ffffff" stroke-width=".7" opacity=".2"  fill="none"/>
 
-      <!-- The DRUM / circular cap at the apex where the spires emerge -->
-      <ellipse cx="240" cy="80" rx="22" ry="3.5" fill="#e8ebf0"/>
-      <ellipse cx="240" cy="80" rx="22" ry="3.5" fill="none" stroke="#7a8294" stroke-width=".6" opacity=".7"/>
-      <!-- Drum top edge highlight -->
-      <path d="M218 80 Q230 76 240 76 Q250 76 262 80" stroke="#ffffff" stroke-width=".6" opacity=".7" fill="none"/>
+      <!-- The DRUM / circular cap at the apex -->
+      <ellipse cx="240" cy="80" rx="24" ry="3.6" fill="#e8ebf0"/>
+      <ellipse cx="240" cy="80" rx="24" ry="3.6" fill="none" stroke="#7a8294" stroke-width=".5" opacity=".7"/>
+      <path d="M216 80 Q228 76 240 76 Q252 76 264 80" stroke="#ffffff" stroke-width=".6" opacity=".75" fill="none"/>
 
-      <!-- ICONIC SPIRE CROWN — clustered cluster of needle-thin spires emerging from the drum -->
+      <!-- ICONIC SPIRE CROWN — spread across the top, varying heights, traced from the refs -->
       <g stroke="#f4f5f7" stroke-width="1" stroke-linecap="round" fill="none">
-        <!-- Tallest center spire — the iconic central needle -->
-        <line x1="240" y1="78" x2="240" y2="6"/>
-        <!-- Cross-braces on the central spire (the iconic ladder rungs) -->
-        <line x1="236" y1="12" x2="244" y2="12" stroke-width=".7"/>
-        <line x1="235" y1="20" x2="245" y2="20" stroke-width=".7"/>
-        <line x1="234" y1="30" x2="246" y2="30" stroke-width=".8"/>
-        <line x1="233" y1="42" x2="247" y2="42" stroke-width=".8"/>
-        <line x1="232" y1="56" x2="248" y2="56" stroke-width=".8"/>
-
-        <!-- Immediate neighbors — almost as tall, slight lean outward -->
-        <line x1="237" y1="80" x2="234" y2="16"/>
-        <line x1="243" y1="80" x2="246" y2="16"/>
-
-        <!-- Mid spires -->
-        <line x1="233" y1="80" x2="227" y2="26"/>
-        <line x1="247" y1="80" x2="253" y2="26"/>
-
-        <!-- Shorter spires fanning out -->
-        <line x1="229" y1="80" x2="220" y2="38"/>
-        <line x1="251" y1="80" x2="260" y2="38"/>
-
-        <!-- Outer short spires -->
-        <line x1="224" y1="80" x2="212" y2="50"/>
-        <line x1="256" y1="80" x2="268" y2="50"/>
-
-        <!-- Outermost stubs at the drum edges -->
-        <line x1="220" y1="80" x2="206" y2="62"/>
-        <line x1="260" y1="80" x2="274" y2="62"/>
+        <!-- Outer left stubs -->
+        <line x1="200" y1="84" x2="194" y2="58"/>
+        <line x1="208" y1="82" x2="204" y2="46"/>
+        <!-- Mid-left spires -->
+        <line x1="215" y1="80" x2="212" y2="32"/>
+        <line x1="220" y1="80" x2="219" y2="20"/>
+        <!-- Tall left-of-center (with light cross-braces) -->
+        <line x1="226" y1="79" x2="226" y2="10"/>
+        <line x1="223" y1="22" x2="229" y2="22" stroke-width=".6"/>
+        <line x1="223" y1="34" x2="229" y2="34" stroke-width=".6"/>
+        <!-- Tallest CENTER spire with full cross-brace ladder -->
+        <line x1="240" y1="78" x2="240" y2="4"/>
+        <line x1="236" y1="10" x2="244" y2="10" stroke-width=".6"/>
+        <line x1="235" y1="18" x2="245" y2="18" stroke-width=".7"/>
+        <line x1="234" y1="28" x2="246" y2="28" stroke-width=".75"/>
+        <line x1="233" y1="40" x2="247" y2="40" stroke-width=".8"/>
+        <line x1="232" y1="54" x2="248" y2="54" stroke-width=".8"/>
+        <!-- Tall right-of-center -->
+        <line x1="254" y1="79" x2="254" y2="10"/>
+        <line x1="251" y1="22" x2="257" y2="22" stroke-width=".6"/>
+        <line x1="251" y1="34" x2="257" y2="34" stroke-width=".6"/>
+        <!-- Mid-right spires -->
+        <line x1="260" y1="80" x2="261" y2="20"/>
+        <line x1="265" y1="80" x2="268" y2="32"/>
+        <!-- Outer right stubs -->
+        <line x1="272" y1="82" x2="276" y2="46"/>
+        <line x1="280" y1="84" x2="286" y2="58"/>
       </g>
 
       <!-- Glowing tip on the tallest spire -->
-      <circle cx="240" cy="6" r="1.8" fill="#7be3ff"/>
-      <circle cx="240" cy="6" r="4.5" fill="#7be3ff" opacity=".4"/>
+      <circle cx="240" cy="4" r="1.8" fill="#7be3ff"/>
+      <circle cx="240" cy="4" r="4.5" fill="#7be3ff" opacity=".45"/>
 
       <!-- Dark arched portal where the PeopleMover enters — on the LEFT face of the dome -->
       <path d="M 78 240
