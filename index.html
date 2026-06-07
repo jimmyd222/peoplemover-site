@@ -138,7 +138,7 @@
   .scene {
     position: relative;
     width: 100%; max-width: 760px;
-    height: 220px;
+    height: 260px;
     margin-bottom: 56px;
     overflow: hidden;
   }
@@ -190,6 +190,75 @@
   }
   .tram-wrap svg, .monorail-wrap svg { display: block; }
 
+  /* Coral Moons neon billboard */
+  .billboard {
+    position: absolute;
+    left: 8%; bottom: 78px;
+    z-index: 1;
+    pointer-events: none;
+    animation: neon-flicker 5.5s ease-in-out infinite;
+  }
+  .billboard-frame {
+    position: relative;
+    padding: 8px 14px 9px;
+    border: 1px solid rgba(123,227,255,.55);
+    border-radius: 3px;
+    background: rgba(10,20,48,.7);
+    box-shadow:
+      0 0 14px rgba(123,227,255,.18),
+      inset 0 0 12px rgba(123,227,255,.08);
+    text-align: center;
+  }
+  .billboard-brand {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: .28em;
+    color: #7be3ff;
+    text-shadow: 0 0 8px rgba(123,227,255,.6);
+    margin-bottom: 2px;
+  }
+  .billboard-line {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: .12em;
+    color: #fff7e0;
+    text-shadow: 0 0 10px rgba(255,194,102,.55);
+    line-height: 1;
+  }
+  .billboard-line sub {
+    font-size: 11px;
+    vertical-align: baseline;
+    position: relative; top: 2px;
+    color: #ffc266;
+  }
+  .billboard-sub {
+    font-family: 'VT323', monospace;
+    font-size: 11px;
+    letter-spacing: .22em;
+    color: rgba(123,227,255,.7);
+    margin-top: 3px;
+  }
+  .billboard-post {
+    width: 1px; height: 22px;
+    background: linear-gradient(180deg, rgba(123,227,255,.5), rgba(123,227,255,.05));
+    margin: 0 auto;
+  }
+  @keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    47%      { opacity: 1; }
+    48%      { opacity: .35; }
+    49%      { opacity: 1; }
+    82%      { opacity: 1; }
+    83%      { opacity: .5; }
+    84%      { opacity: 1; }
+  }
+  @media (max-width: 520px) {
+    .billboard { left: 4%; bottom: 70px; transform: scale(.86); transform-origin: left bottom; }
+  }
+
   /* Tiny info strip */
   .strip {
     font-family: 'VT323', monospace;
@@ -207,6 +276,34 @@
     background: var(--teal);
     box-shadow: 0 0 10px var(--teal);
     animation: blink 1.6s ease-in-out infinite;
+    flex: 0 0 auto;
+  }
+  .ticker {
+    width: min(420px, 70vw);
+    overflow: hidden;
+    position: relative;
+    height: 22px;
+  }
+  .ticker-track {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    animation: ticker 18s steps(4) infinite;
+  }
+  .ticker-track > span {
+    display: flex; align-items: center; justify-content: center;
+    height: 22px;
+    white-space: nowrap;
+    color: var(--teal);
+  }
+  .ticker-track > span sub {
+    font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--amber);
+  }
+  @keyframes ticker {
+    0%, 22%   { transform: translateY(0); }
+    25%, 47%  { transform: translateY(-22px); }
+    50%, 72%  { transform: translateY(-44px); }
+    75%, 97%  { transform: translateY(-66px); }
+    100%      { transform: translateY(-88px); }
   }
   @keyframes blink {
     0%, 100% { opacity: 1; }
@@ -224,7 +321,7 @@
     .strip { font-size: 15px; letter-spacing: .2em; padding: 6px 14px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    body::before, h1 em, .strip .dot { animation: none; }
+    body::before, h1 em, .strip .dot, .billboard, .ticker-track { animation: none; }
     .tram-wrap, .monorail-wrap { animation: none; left: auto; right: 8%; }
     .tram-wrap { left: 8%; right: auto; }
   }
@@ -232,12 +329,27 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow">Tomorrowland Transit Authority · WEDway</div>
+  <div class="eyebrow">WEDway PeopleMover · Est. 1975</div>
   <h1>Please stand clear<br>of the <em>doors</em>.</h1>
   <p class="esp"><em>Por favor manténgase alejado de las puertas.</em></p>
   <p class="tagline">A love letter to <strong>the slow blue tram</strong><br>and <strong>the silver bullet</strong> overhead.</p>
 
   <div class="scene" aria-hidden="true">
+    <!-- Coral Moons billboard — the in-ride ad you pass on the PeopleMover -->
+    <div class="billboard" aria-hidden="true">
+      <div class="billboard-frame">
+        <div class="billboard-brand">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#7be3ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3 C 8 9, 6 13, 6 16 a6 6 0 0 0 12 0 c 0 -3 -2 -7 -6 -13 z"/>
+          </svg>
+          <span>CORAL MOONS</span>
+        </div>
+        <div class="billboard-line">YOU H<sub>2</sub>O IT TO YOURSELF</div>
+        <div class="billboard-sub">RESERVE · NOW BOARDING TOMORROW</div>
+      </div>
+      <div class="billboard-post"></div>
+    </div>
+
     <!-- Space Mountain silhouette in the distance -->
     <svg class="space-mtn" viewBox="0 0 180 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet">
       <defs>
@@ -355,7 +467,15 @@
 
   <div class="strip">
     <span class="dot"></span>
-    <span>PAGING MR. MORROW · MR. TOM MORROW</span>
+    <div class="ticker" aria-label="Tomorrowland Transit Authority public address">
+      <div class="ticker-track">
+        <span>PAGING MR. MORROW · MR. TOM MORROW</span>
+        <span>YOU H<sub>2</sub>O IT TO YOURSELF · BOOK CORAL MOONS TODAY</span>
+        <span>PLEASE REMAIN SEATED · POR FAVOR PERMANEZCAN SENTADOS</span>
+        <span>NOW BOARDING · WEDWAY PEOPLEMOVER · EST. 1975</span>
+        <span aria-hidden="true">PAGING MR. MORROW · MR. TOM MORROW</span>
+      </div>
+    </div>
   </div>
 </main>
 
