@@ -181,36 +181,60 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Space Mountain silhouette
-     The JPG is black-on-white. invert(1) flips it to white-on-black,
-     then mix-blend-mode: lighten lets the black background drop away
-     against the dark sky, leaving just the white mountain. No file
-     editing needed. */
-  .space-mtn {
+  /* Wrapper holds the image + the red spire light so they scale together */
+  .mtn-wrap {
     position: absolute;
-    right: -2%;
-    bottom: -18%;
-    height: 150%;
-    width: auto;
+    right: 0; bottom: 0;
+    height: 100%;
     z-index: 3;
     pointer-events: none;
-    filter: invert(1) brightness(1.05);
-    mix-blend-mode: lighten;
   }
-  @media (max-width: 520px) {
-    .space-mtn { height: 130%; bottom: -10%; }
+  .mtn-wrap .space-mtn {
+    display: block;
+    height: 100%;
+    width: auto;
+    /* The PNG body is white; the detail lines are black. On the dark blue
+       page, the white reads cleanly and the black blends into the sky. */
   }
-  /* Dark base bar across the bottom — tram disappears beneath it */
+  /* Slow-flashing red aircraft warning light atop the tallest spire.
+     left/top calibrated to the spire tip position in the PNG. */
+  .spire-light {
+    position: absolute;
+    top: 14%;
+    left: 45%;
+    width: 7px; height: 7px;
+    margin-left: -3.5px; margin-top: -3.5px;
+    border-radius: 50%;
+    background: #ff3a3a;
+    box-shadow:
+      0 0 6px 2px rgba(255,58,58,.85),
+      0 0 14px 4px rgba(255,58,58,.4);
+    animation: spire-blink 2.6s ease-in-out infinite;
+  }
+  @keyframes spire-blink {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 8px 3px rgba(255,58,58,.95), 0 0 18px 6px rgba(255,58,58,.5);
+    }
+    50% {
+      opacity: .25;
+      box-shadow: 0 0 3px 1px rgba(255,58,58,.5), 0 0 6px 2px rgba(255,58,58,.2);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spire-light { animation: none; }
+  }
+  /* Dark base bar — safety net under the silhouette so tram disappears cleanly */
   .mtn-base {
     position: absolute;
-    right: 0; bottom: 0; left: 30%;
-    height: 28px;
+    right: 0; bottom: 0; left: 28%;
+    height: 22px;
     background: linear-gradient(180deg, #0a1430 0%, #050a1c 100%);
     z-index: 4;
     pointer-events: none;
   }
   @media (max-width: 520px) {
-    .mtn-base { left: 22%; }
+    .mtn-base { left: 18%; }
   }
   /* Track runs from the left edge of the scene to the portal on the mountain's left face */
   .track {
@@ -425,9 +449,12 @@
       <div class="billboard-post"></div>
     </div>
 
-    <!-- Space Mountain silhouette (inverted + screened so it renders white on the dark sky) -->
-    <img class="space-mtn" src="space-mountain.jpg" alt="" loading="eager" decoding="async"/>
-    <!-- Dark band beneath the silhouette so the tram disappears under the structure base -->
+    <!-- Space Mountain silhouette + flashing spire light -->
+    <div class="mtn-wrap">
+      <img class="space-mtn" src="space-mountain-transparent.png" alt="" loading="eager" decoding="async"/>
+      <span class="spire-light" aria-hidden="true"></span>
+    </div>
+    <!-- Dark base bar — safety net to fully occlude the tram at track level -->
     <div class="mtn-base"></div>
 
 
