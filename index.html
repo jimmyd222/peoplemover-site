@@ -217,7 +217,7 @@
   /* Slow-flashing red aircraft warning beacon on the tallest spire tip */
   .spire-light {
     position: absolute;
-    top: 27%;
+    top: 38%;
     left: 49%;
     width: 8px; height: 8px;
     margin-left: -4px; margin-top: -4px;
@@ -411,6 +411,9 @@
     .scene { height: 280px; margin-bottom: 40px; }
     .tram-wrap { transform: scale(.82); transform-origin: left bottom; }
     .strip { font-size: 15px; letter-spacing: .2em; padding: 6px 14px; }
+    /* Mountain shrinks on mobile so it doesn't dominate */
+    .mtn-wrap { right: -6%; bottom: -10%; height: 105%; }
+    .scene::after { height: 130px; }
   }
   @media (prefers-reduced-motion: reduce) {
     body::before, .strip .dot, .billboard, .ticker > span { animation: none; }
