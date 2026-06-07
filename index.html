@@ -340,23 +340,24 @@
     display: flex; align-items: center; justify-content: center;
     white-space: nowrap;
     color: var(--teal);
-    letter-spacing: .16em;
+    letter-spacing: .14em;
     font-size: 16px;
     opacity: 0;
-    animation: tickerFade 20s linear infinite;
+    animation: tickerFade 30s linear infinite;
   }
-  .ticker > span:nth-child(1) { animation-delay: 0s; }
-  .ticker > span:nth-child(2) { animation-delay: 5s; }
-  .ticker > span:nth-child(3) { animation-delay: 10s; }
-  .ticker > span:nth-child(4) { animation-delay: 15s; }
+  .ticker > span:nth-child(1) { animation-delay: 0s;  }
+  .ticker > span:nth-child(2) { animation-delay: 6s;  }
+  .ticker > span:nth-child(3) { animation-delay: 12s; }
+  .ticker > span:nth-child(4) { animation-delay: 18s; }
+  .ticker > span:nth-child(5) { animation-delay: 24s; }
   .ticker > span sub {
     font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--teal-glow);
   }
   @keyframes tickerFade {
     0%   { opacity: 0; }
-    3%   { opacity: 1; }
-    22%  { opacity: 1; }
-    25%  { opacity: 0; }
+    2%   { opacity: 1; }
+    18%  { opacity: 1; }
+    20%  { opacity: 0; }
     100% { opacity: 0; }
   }
   @keyframes blink {
@@ -612,8 +613,9 @@
     <span class="dot"></span>
     <div class="ticker" aria-label="Tomorrowland Transit Authority public address">
       <span>PAGING MR. MORROW · MR. TOM MORROW</span>
-      <span>YOU H<sub>2</sub>O IT TO YOURSELF · BOOK CORAL MOONS</span>
-      <span>PLEASE REMAIN SEATED · PERMANEZCAN SENTADOS</span>
+      <span>I'M ORAC-5, YOUR GUIDE ABOARD THIS HIGHWAY IN THE SKY</span>
+      <span>MY FELLOW SENTIENT LIFE FORMS · JOURNEY HAS NEARLY COME FULL CIRCLE</span>
+      <span>EXPLORE TOMORROW, TODAY · SEE YOU IN THE FUTURE</span>
       <span>NOW BOARDING · WEDWAY PEOPLEMOVER · EST. 1975</span>
     </div>
   </div>
