@@ -186,20 +186,15 @@
       linear-gradient(90deg, transparent 0, transparent calc(76% - 1px), #2a3a5e calc(76% - 1px), #2a3a5e calc(76% + 1px), transparent calc(76% + 1px));
     opacity: .5;
   }
-  /* Tram glides left → into the portal. Space Mtn (z:3) overlaps the tram (z:2). */
+  /* Tram glides left → fully behind Space Mountain. z-index masking handles the visual occlusion. */
   .tram-wrap {
     position: absolute; bottom: 62px; left: 0;
     animation: glide 22s linear infinite;
     z-index: 2;
   }
-  /* tram travels from off-screen-left into the portal area (~50% of scene), then waits hidden, then restarts */
   @keyframes glide {
-    0%   { transform: translateX(-260px); opacity: 1; }
-    72%  { transform: translateX(calc(50% + 60px)); opacity: 1; }
-    78%  { transform: translateX(calc(50% + 60px)); opacity: 0; }
-    79%  { transform: translateX(-260px); opacity: 0; }
-    85%  { transform: translateX(-260px); opacity: 1; }
-    100% { transform: translateX(calc(20%)); opacity: 1; }
+    0%   { transform: translateX(-260px); }
+    100% { transform: translateX(100vw); }
   }
   .tram-wrap svg { display: block; }
 
@@ -292,7 +287,7 @@
     flex: 0 0 auto;
   }
   .ticker {
-    width: min(440px, 72vw);
+    width: min(620px, 84vw);
     height: 22px;
     overflow: hidden;
     position: relative;
@@ -302,6 +297,8 @@
     display: flex; align-items: center; justify-content: center;
     white-space: nowrap;
     color: var(--teal);
+    letter-spacing: .16em;
+    font-size: 16px;
     opacity: 0;
     animation: tickerFade 20s linear infinite;
   }
