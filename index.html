@@ -147,23 +147,24 @@
     margin-bottom: 56px;
     overflow: hidden;
   }
-  /* Space Mountain — dominates the right side of the scene */
+  /* Space Mountain dominates the right ~55% of the scene with the portal on its left face */
   .space-mtn {
     position: absolute;
-    right: -4%; bottom: 0;
-    width: 64%; max-width: 540px;
+    right: 0; bottom: 0;
+    width: 55%; min-width: 360px; max-width: 560px;
     height: 100%;
     pointer-events: none;
     z-index: 3;
   }
   @media (max-width: 520px) {
-    .space-mtn { right: -8%; width: 78%; }
+    .space-mtn { width: 62%; min-width: 240px; }
   }
-  /* PeopleMover track — slim metallic beam ending at the portal */
+  /* Track runs from the left edge of the scene to the portal on the mountain's left face */
   .track {
-    position: absolute; left: 0; right: 26%; bottom: 60px; height: 3px;
+    position: absolute; left: 0; bottom: 60px; height: 3px;
+    width: calc(45% + 60px); /* run a bit past the mountain's left edge so it disappears under */
     background:
-      linear-gradient(90deg, transparent 0%, #6b7d9e 6%, #aab6c9 50%, #6b7d9e 96%, transparent 100%);
+      linear-gradient(90deg, transparent 0%, #6b7d9e 6%, #aab6c9 50%, #6b7d9e 92%, #6b7d9e 100%);
     border-radius: 2px;
     box-shadow: 0 0 14px rgba(123,140,170,.22);
     z-index: 1;
@@ -175,25 +176,30 @@
   }
   /* Vertical support posts under the elevated track */
   .posts {
-    position: absolute; left: 0; right: 26%; bottom: 0; height: 60px;
+    position: absolute; left: 0; bottom: 0;
+    width: calc(45% + 60px); height: 60px;
     z-index: 1; pointer-events: none;
     background-image:
-      linear-gradient(90deg, transparent 0, transparent calc(8% - 1px),  #2a3a5e calc(8% - 1px),  #2a3a5e calc(8% + 1px),  transparent calc(8% + 1px)),
-      linear-gradient(90deg, transparent 0, transparent calc(28% - 1px), #2a3a5e calc(28% - 1px), #2a3a5e calc(28% + 1px), transparent calc(28% + 1px)),
-      linear-gradient(90deg, transparent 0, transparent calc(48% - 1px), #2a3a5e calc(48% - 1px), #2a3a5e calc(48% + 1px), transparent calc(48% + 1px)),
-      linear-gradient(90deg, transparent 0, transparent calc(68% - 1px), #2a3a5e calc(68% - 1px), #2a3a5e calc(68% + 1px), transparent calc(68% + 1px)),
-      linear-gradient(90deg, transparent 0, transparent calc(88% - 1px), #2a3a5e calc(88% - 1px), #2a3a5e calc(88% + 1px), transparent calc(88% + 1px));
+      linear-gradient(90deg, transparent 0, transparent calc(10% - 1px), #2a3a5e calc(10% - 1px), #2a3a5e calc(10% + 1px), transparent calc(10% + 1px)),
+      linear-gradient(90deg, transparent 0, transparent calc(32% - 1px), #2a3a5e calc(32% - 1px), #2a3a5e calc(32% + 1px), transparent calc(32% + 1px)),
+      linear-gradient(90deg, transparent 0, transparent calc(54% - 1px), #2a3a5e calc(54% - 1px), #2a3a5e calc(54% + 1px), transparent calc(54% + 1px)),
+      linear-gradient(90deg, transparent 0, transparent calc(76% - 1px), #2a3a5e calc(76% - 1px), #2a3a5e calc(76% + 1px), transparent calc(76% + 1px));
     opacity: .5;
   }
-  /* Tram glides; Space Mountain z-index is higher so the tram disappears into the portal */
+  /* Tram glides left → into the portal. Space Mtn (z:3) overlaps the tram (z:2). */
   .tram-wrap {
-    position: absolute; bottom: 62px; left: -260px;
-    animation: glide 24s linear infinite;
+    position: absolute; bottom: 62px; left: 0;
+    animation: glide 22s linear infinite;
     z-index: 2;
   }
+  /* tram travels from off-screen-left into the portal area (~50% of scene), then waits hidden, then restarts */
   @keyframes glide {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(calc(100vw + 260px)); }
+    0%   { transform: translateX(-260px); opacity: 1; }
+    72%  { transform: translateX(calc(50% + 60px)); opacity: 1; }
+    78%  { transform: translateX(calc(50% + 60px)); opacity: 0; }
+    79%  { transform: translateX(-260px); opacity: 0; }
+    85%  { transform: translateX(-260px); opacity: 1; }
+    100% { transform: translateX(calc(20%)); opacity: 1; }
   }
   .tram-wrap svg { display: block; }
 
@@ -286,31 +292,32 @@
     flex: 0 0 auto;
   }
   .ticker {
-    width: min(420px, 70vw);
+    width: min(440px, 72vw);
+    height: 22px;
     overflow: hidden;
     position: relative;
-    height: 22px;
   }
-  .ticker-track {
+  .ticker > span {
     position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    animation: ticker 18s steps(4) infinite;
-  }
-  .ticker-track > span {
     display: flex; align-items: center; justify-content: center;
-    height: 22px;
     white-space: nowrap;
     color: var(--teal);
+    opacity: 0;
+    animation: tickerFade 20s linear infinite;
   }
-  .ticker-track > span sub {
+  .ticker > span:nth-child(1) { animation-delay: 0s; }
+  .ticker > span:nth-child(2) { animation-delay: 5s; }
+  .ticker > span:nth-child(3) { animation-delay: 10s; }
+  .ticker > span:nth-child(4) { animation-delay: 15s; }
+  .ticker > span sub {
     font-size: .75em; vertical-align: baseline; position: relative; top: 1px; color: var(--teal-glow);
   }
-  @keyframes ticker {
-    0%, 22%   { transform: translateY(0); }
-    25%, 47%  { transform: translateY(-22px); }
-    50%, 72%  { transform: translateY(-44px); }
-    75%, 97%  { transform: translateY(-66px); }
-    100%      { transform: translateY(-88px); }
+  @keyframes tickerFade {
+    0%   { opacity: 0; }
+    3%   { opacity: 1; }
+    22%  { opacity: 1; }
+    25%  { opacity: 0; }
+    100% { opacity: 0; }
   }
   @keyframes blink {
     0%, 100% { opacity: 1; }
@@ -327,7 +334,8 @@
     .strip { font-size: 15px; letter-spacing: .2em; padding: 6px 14px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    body::before, .strip .dot, .billboard, .ticker-track { animation: none; }
+    body::before, .strip .dot, .billboard, .ticker > span { animation: none; }
+    .ticker > span:first-child { opacity: 1; }
     .tram-wrap { animation: none; left: 12%; }
   }
 </style>
@@ -361,77 +369,93 @@
       <div class="billboard-post"></div>
     </div>
 
-    <!-- Space Mountain — the centerpiece. PeopleMover glides INTO it. -->
-    <svg class="space-mtn" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
+    <!-- Space Mountain — wide dome with ribbed cone + small spire crown -->
+    <svg class="space-mtn" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYEnd meet" aria-hidden="true">
       <defs>
         <linearGradient id="mtnFace" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"  stop-color="#f4f5f7"/>
-          <stop offset="55%" stop-color="#c5cad4"/>
-          <stop offset="100%" stop-color="#6b7280"/>
+          <stop offset="45%" stop-color="#d8dce4"/>
+          <stop offset="100%" stop-color="#7c8492"/>
         </linearGradient>
         <linearGradient id="mtnShade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#2a3550" stop-opacity=".0"/>
-          <stop offset="100%" stop-color="#0a1430" stop-opacity=".75"/>
+          <stop offset="0%"  stop-color="#2a3550" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0a1430" stop-opacity=".5"/>
         </linearGradient>
         <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%"  stop-color="#7be3ff" stop-opacity=".85"/>
-          <stop offset="60%" stop-color="#2b7dbf" stop-opacity=".4"/>
+          <stop offset="60%" stop-color="#2b7dbf" stop-opacity=".35"/>
           <stop offset="100%" stop-color="#0a1430" stop-opacity="0"/>
         </radialGradient>
       </defs>
 
-      <!-- Main cone body: wide flared base, pinched top -->
-      <path d="M 70 280  Q 70 240, 110 200  Q 150 150, 195 80  Q 200 70, 205 80  Q 250 150, 290 200  Q 330 240, 330 280  Z"
+      <!-- Lower base building strip (the dark band you see in the photo at the structure base) -->
+      <rect x="20" y="258" width="440" height="22" fill="#1b2540"/>
+      <rect x="20" y="258" width="440" height="2"  fill="#3a4a6e"/>
+
+      <!-- Main dome silhouette — wide bell curve, not a teepee -->
+      <path d="M 30 258
+               C 30 222, 70 178, 120 142
+               C 165 110, 205 86, 235 75
+               C 240 73, 245 73, 245 73
+               C 280 86, 320 110, 360 142
+               C 410 178, 450 222, 450 258
+               Z"
             fill="url(#mtnFace)"/>
-      <!-- Bottom-edge shadow -->
-      <path d="M 70 280  Q 70 240, 110 200  Q 150 150, 195 80  Q 200 70, 205 80  Q 250 150, 290 200  Q 330 240, 330 280  Z"
+      <!-- Soft bottom shading -->
+      <path d="M 30 258
+               C 30 222, 70 178, 120 142
+               C 165 110, 205 86, 235 75
+               C 245 73, 250 75, 250 75
+               C 280 86, 320 110, 360 142
+               C 410 178, 450 222, 450 258
+               Z"
             fill="url(#mtnShade)"/>
 
-      <!-- Vertical fluted ridges (the iconic pleats) -->
-      <g stroke="#7a8294" stroke-width=".7" opacity=".55" fill="none">
-        <path d="M200 78 Q175 160, 130 230 Q110 252, 95 278"/>
-        <path d="M200 78 Q180 160, 150 230 Q138 256, 130 278"/>
-        <path d="M200 78 Q188 160, 175 235 Q170 258, 165 278"/>
-        <path d="M200 78 Q195 160, 195 235 Q195 258, 195 278"/>
-        <path d="M200 78 Q205 160, 220 235 Q228 258, 235 278"/>
-        <path d="M200 78 Q212 160, 250 230 Q262 256, 270 278"/>
-        <path d="M200 78 Q220 160, 275 230 Q295 252, 305 278"/>
+      <!-- Vertical fluted ridges — emerge from a small plateau, NOT a single point -->
+      <g stroke="#8a92a4" stroke-width=".7" opacity=".55" fill="none">
+        <path d="M225 80  Q150 160, 60  258"/>
+        <path d="M230 78  Q170 160, 110 258"/>
+        <path d="M235 76  Q190 160, 160 258"/>
+        <path d="M240 75  Q220 160, 210 258"/>
+        <path d="M242 75  Q250 160, 260 258"/>
+        <path d="M245 76  Q280 160, 310 258"/>
+        <path d="M250 78  Q310 160, 360 258"/>
+        <path d="M255 80  Q340 160, 420 258"/>
       </g>
-      <!-- Highlight ridge -->
-      <path d="M198 80 Q180 160, 130 230 Q108 254, 92 278" stroke="#ffffff" stroke-width="1" opacity=".4" fill="none"/>
+      <!-- Subtle front highlight -->
+      <path d="M232 80 Q160 160, 58 258" stroke="#ffffff" stroke-width="1.1" opacity=".32" fill="none"/>
 
-      <!-- Spires — varying heights, the iconic crown -->
-      <g stroke="#e8ebf0" stroke-width="1.5" stroke-linecap="round" fill="none">
-        <!-- Tallest center spire -->
-        <path d="M200 78 L200 8"/>
-        <!-- Tilted spires fanning outward -->
-        <path d="M192 82 L178 22"/>
-        <path d="M208 82 L222 22"/>
-        <path d="M184 86 L162 36"/>
-        <path d="M216 86 L238 36"/>
-        <path d="M176 92 L150 52"/>
-        <path d="M224 92 L250 52"/>
-        <!-- Lower outer spires -->
-        <path d="M168 100 L138 70"/>
-        <path d="M232 100 L262 70"/>
-        <!-- Cross-braces near the top of the tallest spire -->
-        <path d="M195 18 L205 18 M196 28 L204 28 M197 38 L203 38" stroke-width="1"/>
+      <!-- Spire crown — small, sits atop the dome, multiple varying heights -->
+      <g stroke="#e8ebf0" stroke-width="1.4" stroke-linecap="round" fill="none">
+        <!-- Tallest center spire with cross-braces -->
+        <path d="M240 75 L240 22"/>
+        <path d="M235 30 L245 30 M236 40 L244 40 M237 50 L243 50 M238 60 L242 60"/>
+        <!-- Side spires, shorter, tilted outward -->
+        <path d="M233 78 L222 36"/>
+        <path d="M247 78 L258 36"/>
+        <path d="M226 80 L210 50"/>
+        <path d="M254 80 L270 50"/>
+        <!-- Outer little spires near top -->
+        <path d="M220 84 L198 62"/>
+        <path d="M260 84 L282 62"/>
       </g>
-      <!-- Glowing tip -->
-      <circle cx="200" cy="8" r="2" fill="#7be3ff"/>
-      <circle cx="200" cy="8" r="5" fill="#7be3ff" opacity=".35"/>
+      <!-- Glowing tip on the tallest spire -->
+      <circle cx="240" cy="22" r="2" fill="#7be3ff"/>
+      <circle cx="240" cy="22" r="5" fill="#7be3ff" opacity=".4"/>
 
-      <!-- Dark arched portal where the PeopleMover enters -->
-      <path d="M 252 248  Q 252 232, 268 232  L 312 232  Q 328 232, 328 248  L 328 268  L 252 268  Z"
+      <!-- Dark arched portal where the PeopleMover enters — on the LEFT face of the dome -->
+      <path d="M 78 240
+               Q 78 222, 96 222
+               L 152 222
+               Q 170 222, 170 240
+               L 170 258
+               L 78 258 Z"
             fill="#050a1c"/>
-      <!-- Soft portal glow rim -->
-      <ellipse cx="290" cy="248" rx="42" ry="20" fill="url(#portalGlow)" opacity=".7"/>
+      <!-- Soft teal portal glow -->
+      <ellipse cx="124" cy="240" rx="52" ry="24" fill="url(#portalGlow)" opacity=".8"/>
       <!-- Portal frame highlight -->
-      <path d="M 252 248  Q 252 232, 268 232  L 312 232  Q 328 232, 328 248"
-            stroke="#3a6b8a" stroke-width="1.2" fill="none" opacity=".7"/>
-      <!-- Small TTA sign above the portal -->
-      <rect x="270" y="222" width="40" height="6" rx="1" fill="#1f7ad6"/>
-      <rect x="270" y="222" width="40" height="6" rx="1" fill="none" stroke="#7be3ff" stroke-width=".3" opacity=".8"/>
+      <path d="M 78 240 Q 78 222, 96 222 L 152 222 Q 170 222, 170 240"
+            stroke="#3a6b8a" stroke-width="1.2" fill="none" opacity=".75"/>
     </svg>
 
 
@@ -498,13 +522,10 @@
   <div class="strip">
     <span class="dot"></span>
     <div class="ticker" aria-label="Tomorrowland Transit Authority public address">
-      <div class="ticker-track">
-        <span>PAGING MR. MORROW · MR. TOM MORROW</span>
-        <span>YOU H<sub>2</sub>O IT TO YOURSELF · BOOK CORAL MOONS TODAY</span>
-        <span>PLEASE REMAIN SEATED · POR FAVOR PERMANEZCAN SENTADOS</span>
-        <span>NOW BOARDING · WEDWAY PEOPLEMOVER · EST. 1975</span>
-        <span aria-hidden="true">PAGING MR. MORROW · MR. TOM MORROW</span>
-      </div>
+      <span>PAGING MR. MORROW · MR. TOM MORROW</span>
+      <span>YOU H<sub>2</sub>O IT TO YOURSELF · BOOK CORAL MOONS</span>
+      <span>PLEASE REMAIN SEATED · PERMANEZCAN SENTADOS</span>
+      <span>NOW BOARDING · WEDWAY PEOPLEMOVER · EST. 1975</span>
     </div>
   </div>
 </main>
